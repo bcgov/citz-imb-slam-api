@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --production --silent
 COPY ./dist .
-RUN ls -l
+LABEL org.opencontainers.image.source https://github.com/BCGOV/citz-imb-slam-api
 EXPOSE 3000
 RUN chown -R node:node /app
 USER node
