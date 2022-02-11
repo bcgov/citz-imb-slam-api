@@ -37,7 +37,7 @@ jobs:
   deploy-dev:
     name: Deploy Dev
     needs: [commit-data, build]
-    uses: bcgov/citz-imb/.github/workflows/Deploy.yml@main
+    uses: bcgov/citz-imb-slam-api/.github/workflows/Deploy.yml@main
     with:
       ENVIRONMENT: dev
       TAG: ${{ needs.commit-data.outputs.short_sha}}
