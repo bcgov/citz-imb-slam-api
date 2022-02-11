@@ -54,7 +54,7 @@ jobs:
           command: curl -sSfLi slam-${{ secrets.OPENSHIFT_NAMESPACE }}.apps.silver.devops.gov.bc.ca/api
 
       - name: Send Notification to Teams
-        if: inputs.ENVIRONMENT != 'dev'
+        # if: inputs.ENVIRONMENT != 'dev'
         uses: thechetantalwar/teams-notify@v2
         with:
           teams_webhook_url: ${{ secrets.TEAM_HOOK }}
