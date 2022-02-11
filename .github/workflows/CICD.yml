@@ -44,3 +44,31 @@ jobs:
       OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
       OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
       TEAM_HOOK: ${{ secrets.TEAM_HOOK }}
+
+  deploy-test:
+    if: contains(github.event.head_commit.message, '#release')
+    name: Deploy Test
+    needs: [commit-data, deploy-dev]
+    uses: bcgov/citz-imb-slam-api/.github/workflows/deploy.yml@main
+    with:
+      ENVIRONMENT: test
+      TAG: ${{ needs.commit-data.outputs.short_sha}}
+    secrets:
+      OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+      OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+      OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
+      TEAM_HOOK: ${{ secrets.TEAM_HOOK }}
+
+  deploy-prod:
+    if: contains(github.event.head_commit.message, '#release')
+    name: Deploy Prod
+    needs: [commit-data, deploy-test]
+    uses: bcgov/citz-imb-slam-api/.github/workflows/deploy.yml@main
+    with:
+      ENVIRONMENT: test
+      TAG: ${{ needs.commit-data.outputs.short_sha}}
+    secrets:
+      OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+      OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+      OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_NAMESPACE }}
+      TEAM_HOOK: ${{ secrets.TEAM_HOOK }}
