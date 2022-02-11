@@ -57,7 +57,7 @@ jobs:
           tags: ${{ inputs.SHORT_SHA }}
           containerfiles: ./Dockerfile
 
-      - name: Push To Registry
+      - name: Push to registry
         id: push-image
         uses: redhat-actions/push-to-registry@v2
         with:
@@ -65,4 +65,4 @@ jobs:
           tags: ${{ steps.build-image.outputs.tags }}
           registry: ghcr.io/${{ github.repository_owner }}
           username: ${{ github.actor }}
-          password: $${{ github.token }}
+          password: ${{ github.token }}
