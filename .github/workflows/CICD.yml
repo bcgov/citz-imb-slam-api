@@ -30,4 +30,4 @@ jobs:
     needs: commit-data
     uses: bcgov/citz-imb-slam-api/.github/workflows/build.yml@main
     with:
-      SHORT_SHA: $${{ needs.commit-data.outputs.short_sha }}
+      SHORT_SHA: ${{ needs.commit-data.outputs.short_sha }}
