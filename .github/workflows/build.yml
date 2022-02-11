@@ -15,7 +15,7 @@ on:
 
 jobs:
   Build:
-    name: build slam-api
+    name: slam-api
     runs-on: ubuntu-20.04
     outputs:
       registry-path: ${{ steps.push-image.outputs.registry-path }}
