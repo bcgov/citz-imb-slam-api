@@ -9,9 +9,6 @@ on:
     outputs:
       registry-path:
         value: ${{ jobs.Build.outputs.registry-path }}
-    secrets:
-      CACHE_VERSION:
-        required: false
 
 jobs:
   Build:
@@ -30,19 +27,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16'
-
-      - name: Cache Node Package Modules
-        id: npmCacheStep
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}
 
       - name: Install Node Package Modules
         if: steps.npmCacheStep.outputs.cache-hit != 'true'
