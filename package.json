@@ -15,7 +15,6 @@
     "build": "babel src -d dist"
   },
   "dependencies": {
-    "@babel/cli": "7.17.0",
     "@babel/runtime": "7.17.2",
     "@nestjs/common": "8.2.6",
     "@nestjs/core": "8.2.6",
@@ -26,6 +25,7 @@
     "swagger-ui-express": "^4.3.0"
   },
   "devDependencies": {
+    "@babel/cli": "7.17.0",
     "@babel/core": "7.17.2",
     "@babel/node": "7.16.8",
     "@babel/plugin-proposal-decorators": "7.17.2",
