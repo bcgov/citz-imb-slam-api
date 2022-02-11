@@ -1,0 +1,68 @@
+name: BUILD
+
+on:
+  workflow_call:
+    inputs:
+      SHORT_SHA:
+        required: true
+        type: string
+    outputs:
+      registry-path:
+        value: ${{ jobs.Build.outputs.registry-path }}
+
+jobs:
+  Build:
+    name: build slam-api
+    runs-on: ubuntu-20.04
+    outputs:
+      registry-path: ${{ steps.push-image.outputs.registry-path }}
+      image: ${{ steps.push-image.outputs.image }}
+      tags: ${{ steps.push-image.outputs.tags }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+
+      - name: Cache Node Modules
+        id: npmCacheStep
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ secrets.CACHE_VERSION }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ secrets.CACHE_VERSION }}-
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}
+
+      - name: Install Packages
+        if: steps.npmCacheStep.outputs.cache-hit != 'true'
+        run: npm install --production --silent
+
+      - name: Build Server
+        run: npm run build
+
+      - name: Build Container
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: slam-api
+          tags: ${{ inputs.SHORT_SHA }}
+          containerfiles: ./Dockerfile
+
+      - name: Push To Registry
+        id: push-image
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: ${{ ghcr.io/${{ github.repository_owner }} }}
+          username: ${{ github.actor }}
+          password: $${{ github.token }}
