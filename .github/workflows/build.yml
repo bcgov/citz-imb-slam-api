@@ -49,8 +49,8 @@ jobs:
         if: steps.npmCacheStep.outputs.cache-hit != 'true'
         run: npm install --production --silent
 
-      - name: Install Babel CLI
-        run: npm install -g @babel/cli
+      - name: Babel CLI
+        run: ls -l node_modules
 
       - name: Build Server
         run: npm run build
