@@ -41,7 +41,7 @@ jobs:
           namespace: ${{ secrets.OPENSHIFT_NAMESPACE }}
 
       - name: Deploy to OpenShift
-        run: oc process -f ./openshift/deploy-api-template.yml -p APP_NAME=slam-api -p NAMESPACE=${{ secrets.OPENSHIFT_NAMESPACE }} -p TAG=${{ inputs.TAG }} -p PORT=3000 | oc apply -f -
+        run: oc process -f ./openshift/deploy-api-template.yml -p APP_NAME=slam -p NAMESPACE=${{ secrets.OPENSHIFT_NAMESPACE }} -p TAG=${{ inputs.TAG }} -p PORT=3000 | oc apply -f -
 
       - name: Verify web
         id: verify-web
