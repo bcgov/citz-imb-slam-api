@@ -9,6 +9,9 @@ on:
     outputs:
       registry-path:
         value: ${{ jobs.Build.outputs.registry-path }}
+    secrets:
+      CACHE_VERSION:
+        required: false
 
 jobs:
   Build:
@@ -28,7 +31,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Cache Node Modules
+      - name: Cache Node Package Modules
         id: npmCacheStep
         uses: actions/cache@v2
         env:
@@ -42,7 +45,7 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}
 
-      - name: Install Packages
+      - name: Install Node Package Modules
         if: steps.npmCacheStep.outputs.cache-hit != 'true'
         run: npm install --production --silent
 
@@ -57,7 +60,7 @@ jobs:
           tags: ${{ inputs.SHORT_SHA }}
           containerfiles: ./Dockerfile
 
-      - name: Push to registry
+      - name: Push Image to registry
         id: push-image
         uses: redhat-actions/push-to-registry@v2
         with:
