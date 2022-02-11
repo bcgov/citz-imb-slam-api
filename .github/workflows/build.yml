@@ -50,7 +50,7 @@ jobs:
         run: npm install --production --silent
 
       - name: Babel CLI
-        run: ls -l node_modules
+        run: ls -l
 
       - name: Build Server
         run: npm run build
