@@ -51,7 +51,7 @@ jobs:
           retry_wait_seconds: 10
           max_attempts: 10
           warning_on_retry: false
-          command: curl -sSfLi slam-api-${{ secrets.OPENSHIFT_NAMESPACE }}.apps.silver.devops.gov.bc.ca
+          command: curl -sSfLi slam-${{ secrets.OPENSHIFT_NAMESPACE }}.apps.silver.devops.gov.bc.ca/api
 
       - name: Send Notification to Teams
         if: inputs.ENVIRONMENT != 'dev'
