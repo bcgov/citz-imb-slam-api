@@ -65,7 +65,7 @@ jobs:
     needs: [commit-data, deploy-test]
     uses: bcgov/citz-imb-slam-api/.github/workflows/deploy.yml@main
     with:
-      ENVIRONMENT: test
+      ENVIRONMENT: prod
       TAG: ${{ needs.commit-data.outputs.short_sha}}
     secrets:
       OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
