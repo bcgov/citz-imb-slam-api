@@ -1,4 +1,4 @@
-name: CICD SLAM-API
+name: CICD SLAM-API 
 
 on:
   push:
