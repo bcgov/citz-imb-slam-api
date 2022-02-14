@@ -2,6 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { SoftwareTitle } from './software.entity';
 import { SoftwareService } from './software.service';
+import mockData from './software.mockdata';
 
 // @Crud({
 //   model: {
@@ -18,6 +19,6 @@ import { SoftwareService } from './software.service';
 export class SoftwareController {
   @Get()
   getSoftware() {
-    return 'the software';
+    return mockData();
   }
 }
