@@ -2,5 +2,17 @@
   "yaml.schemas": {
     "file:///c%3A/Users/scott/.vscode/extensions/atlassian.atlascode-2.10.0/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
     "https://json.schemastore.org/github-workflow.json": "file:///c%3A/Users/scott/Documents/GitHub/citz-imb-slam-api/.github/workflows/build.yml"
-  }
+  },
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "askForPassword": true,
+      "driver": "PostgreSQL",
+      "name": "slam",
+      "database": "slam",
+      "username": "postgres"
+    }
+  ]
 }
