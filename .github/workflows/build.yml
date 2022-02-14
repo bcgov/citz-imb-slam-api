@@ -29,7 +29,6 @@ jobs:
           node-version: '16'
 
       - name: Install Node Package Modules
-        if: steps.npmCacheStep.outputs.cache-hit != 'true'
         run: npm install
 
       - name: Babel CLI
