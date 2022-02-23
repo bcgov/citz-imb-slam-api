@@ -3,7 +3,7 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
-  name: deploy-template
+  name: deploy-api-template
 objects:
   - kind: Deployment
     apiVersion: apps/v1

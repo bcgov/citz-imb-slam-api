@@ -2,23 +2,13 @@ import { Controller, Get } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { SoftwareTitle } from './software.entity';
 import { SoftwareService } from './software.service';
-import mockData from './software.mockdata';
 
-// @Crud({
-//   model: {
-//     type: SoftwareTitle,
-//   },
-// })
-// @Controller('software')
-// export class SoftwareController implements CrudController<SoftwareTitle> {
-//   constructor(public service: SoftwareService) {}
-// }
-
-//mock
+@Crud({
+  model: {
+    type: SoftwareTitle,
+  },
+})
 @Controller('software')
-export class SoftwareController {
-  @Get()
-  getSoftware() {
-    return mockData();
-  }
+export class SoftwareController implements CrudController<SoftwareTitle> {
+  constructor(public service: SoftwareService) {}
 }

@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class SoftwareTitle {
+  @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -11,26 +12,10 @@ export class SoftwareTitle {
   title: string;
 
   @ApiProperty()
-  @Column('date')
-  renewal_date: Date;
-
-  @ApiProperty()
-  @Column('money')
-  cost: number;
-
-  @ApiProperty()
   @Column()
-  billing_cycle: string;
+  publisher: string;
 
   @ApiProperty()
   @Column()
   administrator: string;
-
-  @ApiProperty()
-  @Column('int')
-  quantity: number;
-
-  @ApiProperty()
-  @Column('boolean', { default: true })
-  active: boolean;
 }

@@ -10,8 +10,8 @@
       "port": 5432,
       "askForPassword": true,
       "driver": "PostgreSQL",
-      "name": "slam",
-      "database": "slam",
+      "name": "slam-db",
+      "database": "slam-db",
       "username": "postgres"
     }
   ]

@@ -1,0 +1,91 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: deploy-db-template
+objects:
+  - kind: Deployment
+    apiVersion: apps/v1
+    metadata:
+      name: 'slam-db'
+      namespace: '${NAMESPACE}'
+      labels:
+        app: 'slam-db'
+        deployment: 'slam-db'
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: 'slam-db'
+          deployment: 'slam-db'
+      template:
+        metadata:
+          labels:
+            app: 'slam-db'
+            deployment: 'slam-db'
+            role: db
+        spec:
+          volumes:
+            - name: slam-db-data
+              persistentVolumeClaim:
+                claimName: slam-db
+          containers:
+            - name: 'slam-db'
+              image: 'postgres:14.2-alpine3.15'
+              ports:
+                - containerPort: 5432
+                  protocol: TCP
+              env:
+                - name: POSTGRES_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: slam-db
+                      key: database-user
+                - name: POSTGRES_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: slam-db
+                      key: database-password
+                - name: POSTGRES_DATABASE
+                  valueFrom:
+                    secretKeyRef:
+                      name: slam-db
+                      key: database-name
+              volumeMounts:
+                - name: slam-db-data
+                  mountPath: /var/lib/postgresql/data
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      name: 'slam-db'
+      namespace: '${NAMESPACE}'
+      labels:
+        app: 'slam-db'
+    spec:
+      ports:
+        - name: 5432-tcp
+          protocol: TCP
+          port: 5432
+          targetPort: 5432
+      selector:
+        app: 'slam-db'
+        deployment: 'slam-db'
+        role: db
+      type: ClusterIP
+  - kind: PersistentVolumeClaim
+    apiVersion: v1
+    metadata:
+      name: 'slam-db'
+      namespace: '${NAMESPACE}'
+      labels:
+        app: 'slam-db'
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+
+parameters:
+  - name: NAMESPACE
+    displayName: Namespace
+    required: true

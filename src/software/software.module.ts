@@ -5,7 +5,7 @@ import { SoftwareTitle } from './software.entity';
 import { SoftwareService } from './software.service';
 
 @Module({
-  // imports: [TypeOrmModule.forFeature([SoftwareTitle])],
+  imports: [TypeOrmModule.forFeature([SoftwareTitle])],
   controllers: [SoftwareController],
   providers: [SoftwareService],
 })

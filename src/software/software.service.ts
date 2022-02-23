@@ -3,12 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { SoftwareTitle } from './software.entity';
 
-// @Injectable()
-// export class SoftwareService extends TypeOrmCrudService<SoftwareTitle> {
-//   constructor(@InjectRepository(SoftwareTitle) repo) {
-//     super(repo);
-//   }
-// }
-
 @Injectable()
-export class SoftwareService {}
+export class SoftwareService extends TypeOrmCrudService<SoftwareTitle> {
+  constructor(@InjectRepository(SoftwareTitle) repo) {
+    super(repo);
+  }
+}
