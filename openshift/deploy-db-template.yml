@@ -52,7 +52,7 @@ objects:
                       key: database-name
               volumeMounts:
                 - name: slam-db-data
-                  mountPath: /var/lib/postgresql/data
+                  mountPath: /var/lib/postgresql
   - kind: Service
     apiVersion: v1
     metadata:
