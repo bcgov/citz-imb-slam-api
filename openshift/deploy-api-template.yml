@@ -8,61 +8,73 @@ objects:
   - kind: Deployment
     apiVersion: apps/v1
     metadata:
-      name: 'slam-api'
-      namespace: '${NAMESPACE}'
-      labels:
-        app: 'slam-api'
-        deployment: 'slam-api'
+      name: slam-api-deployment
+      namespace: ${NAMESPACE}
     spec:
       replicas: 1
       selector:
         matchLabels:
-          app: 'slam-api'
-          deployment: 'slam-api'
+          component: slam-api
       template:
         metadata:
           labels:
-            app: 'slam-api'
-            deployment: 'slam-api'
+            component: slam-api
             role: frontend
         spec:
           containers:
-            - name: 'slam-api'
-              image: 'ghcr.io/bcgov/slam-api:${TAG}'
+            - name: slam-api
+              image: ghcr.io/bcgov/slam-api:${TAG}
               ports:
                 - containerPort: ${{PORT}}
-                  protocol: TCP
+              env:
+                - name: POSTGRES_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: slam-db
+                      key: POSTGRES_USER
+                - name: POSTGRES_HOST
+                  value: slam-api-service
+                - name: POSTGRES_DATABASE
+                  valueFrom:
+                    secretKeyRef:
+                      name: slam-db
+                      key: POSTGRES_DATABASE
+                - name: POSTGRES_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: slam-db
+                      key: POSTGRES_PASSWORD
+                - name: POSTGRES_SYNCHRONIZE
+                  valueFrom:
+                    secretKeyRef:
+                      name: slam-db
+                      key: POSTGRES_SYNCHRONIZE
+
   - kind: Service
     apiVersion: v1
     metadata:
-      name: 'slam-api'
+      name: slam-api-service
       namespace: '${NAMESPACE}'
-      labels:
-        app: 'slam-api'
     spec:
+      type: ClusterIP
+      selector:
+        component: slam-api
       ports:
         - name: ${PORT}-tcp
-          protocol: TCP
           port: ${{PORT}}
           targetPort: ${{PORT}}
-      selector:
-        app: 'slam-api'
-        deployment: 'slam-api'
-        role: frontend
-      type: ClusterIP
+
   - kind: Route
     apiVersion: route.openshift.io/v1
     metadata:
-      name: 'slam-api'
+      name: slam-api-route
       namespace: '${NAMESPACE}'
-      labels:
-        app: 'slam-api'
     spec:
-      host: 'slam-${NAMESPACE}.apps.silver.devops.gov.bc.ca'
+      host: slam-${NAMESPACE}.apps.silver.devops.gov.bc.ca
       path: /api
       to:
         kind: Service
-        name: 'slam-api'
+        name: slam-api
         weight: 100
       port:
         targetPort: ${PORT}-tcp
@@ -70,11 +82,12 @@ objects:
         termination: edge
         insecureEdgeTerminationPolicy: Redirect
       wildcardPolicy: None
+
   - kind: NetworkPolicy
     apiVersion: networking.k8s.io/v1
     metadata:
       name: allow-loadgen-to-frontend
-      namespace: '${NAMESPACE}'
+      namespace: ${NAMESPACE}
     spec:
       podSelector:
         matchLabels:
@@ -89,11 +102,12 @@ objects:
                   role: loadgenerator
       policyTypes:
         - Ingress
+
   - kind: NetworkPolicy
     apiVersion: networking.k8s.io/v1
     metadata:
       name: allow-from-openshift-ingress
-      namespace: '${NAMESPACE}'
+      namespace: ${NAMESPACE}
     spec:
       ingress:
         - from:
@@ -105,6 +119,7 @@ objects:
           role: frontend
       policyTypes:
         - Ingress
+
   - kind: NetworkPolicy
     apiVersion: networking.k8s.io/v1
     metadata:
@@ -114,6 +129,7 @@ objects:
       ingress:
         - from:
             - podSelector: {}
+
 parameters:
   - name: NAMESPACE
     displayName: Namespace

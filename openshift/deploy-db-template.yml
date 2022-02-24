@@ -6,85 +6,58 @@ objects:
   - kind: Deployment
     apiVersion: apps/v1
     metadata:
-      name: 'slam-db'
-      namespace: '${NAMESPACE}'
+      name: slam-db-deployment
+      namespace: ${NAMESPACE}
       labels:
-        app: 'slam-db'
-        deployment: 'slam-db'
+        component: slam-db
     spec:
       replicas: 1
       selector:
         matchLabels:
-          app: 'slam-db'
-          deployment: 'slam-db'
+          component: slam-db
       template:
         metadata:
           labels:
-            app: 'slam-db'
-            deployment: 'slam-db'
-            role: db
+            component: slam-db
         spec:
           volumes:
-            - name: slam-db-data
+            - name: slam-db-storage
               persistentVolumeClaim:
-                claimName: slam-db
+                claimName: slam-db-persistent-volume-claim
           containers:
-            - name: 'slam-db'
+            - name: slam-db
               image: 'postgres:14.2-alpine3.15'
               ports:
                 - containerPort: 5432
-                  protocol: TCP
+              volumeMounts:
+                - name: slam-db-storage
+                  mountPath: /var/lib/postgresql
+                  subPath: postgres
               env:
-                - name: POSTGRES_USER
-                  valueFrom:
-                    secretKeyRef:
-                      name: slam-db
-                      key: POSTGRES_USER
-                - name: POSTGRES_HOST
-                  value: slam-db-service
                 - name: POSTGRES_PASSWORD
                   valueFrom:
                     secretKeyRef:
                       name: slam-db
                       key: POSTGRES_PASSWORD
-                - name: POSTGRES_DATABASE
-                  valueFrom:
-                    secretKeyRef:
-                      name: slam-db
-                      key: POSTGRES_DATABASE
-                - name: POSTGRES_SYNCHRONIZE
-                  valueFrom:
-                    secretKeyRef:
-                      name: slam-db
-                      key: POSTGRES_SYNCHRONIZE
-              volumeMounts:
-                - name: slam-db-data
-                  mountPath: /var/lib/postgresql
+
   - kind: Service
     apiVersion: v1
     metadata:
       name: slam-db-service
       namespace: '${NAMESPACE}'
-      labels:
-        app: 'slam-db'
     spec:
-      ports:
-        - name: 5432-tcp
-          protocol: TCP
-          port: 5432
-          targetPort: 5432
-      selector:
-        app: 'slam-db'
-        deployment: 'slam-db'
-        role: db
       type: ClusterIP
+      selector:
+        component: slam-db
+      ports:
+        - port: 5432
+          targetPort: 5432
+
   - kind: PersistentVolumeClaim
     apiVersion: v1
     metadata:
-      name: 'slam-db'
-      namespace: '${NAMESPACE}'
-      labels:
-        app: 'slam-db'
+      name: slam-db-persistent-volume-claim
+      namespace: ${NAMESPACE}
     spec:
       accessModes:
         - ReadWriteOnce
