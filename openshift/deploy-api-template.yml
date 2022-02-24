@@ -33,7 +33,7 @@ objects:
                       name: slam-db
                       key: POSTGRES_USER
                 - name: POSTGRES_HOST
-                  value: slam-api-service
+                  value: slam-db-service
                 - name: POSTGRES_DATABASE
                   valueFrom:
                     secretKeyRef:
@@ -74,7 +74,7 @@ objects:
       path: /api
       to:
         kind: Service
-        name: slam-api
+        name: slam-api-service
         weight: 100
       port:
         targetPort: ${PORT}-tcp

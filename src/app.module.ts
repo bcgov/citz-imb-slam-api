@@ -12,6 +12,8 @@ const env = {
   synchronize: process.env.POSTGRES_SYNCHRONIZE === 'true' || false,
 };
 
+console.log('env', env);
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
