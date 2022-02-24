@@ -39,24 +39,31 @@ objects:
                   valueFrom:
                     secretKeyRef:
                       name: slam-db
-                      key: database-user
+                      key: POSTGRES_USER
+                - name: POSTGRES_HOST
+                  value: slam-db-service
                 - name: POSTGRES_PASSWORD
                   valueFrom:
                     secretKeyRef:
                       name: slam-db
-                      key: database-password
+                      key: POSTGRES_PASSWORD
                 - name: POSTGRES_DATABASE
                   valueFrom:
                     secretKeyRef:
                       name: slam-db
-                      key: database-name
+                      key: POSTGRES_DATABASE
+                - name: POSTGRES_SYNCHRONIZE
+                  valueFrom:
+                    secretKeyRef:
+                      name: slam-db
+                      key: POSTGRES_SYNCHRONIZE
               volumeMounts:
                 - name: slam-db-data
                   mountPath: /var/lib/postgresql
   - kind: Service
     apiVersion: v1
     metadata:
-      name: 'slam-db'
+      name: slam-db-service
       namespace: '${NAMESPACE}'
       labels:
         app: 'slam-db'
