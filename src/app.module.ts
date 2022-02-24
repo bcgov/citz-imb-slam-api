@@ -13,6 +13,7 @@ const env = {
 };
 
 console.log('env', env);
+console.log('process.env', process.env);
 
 @Module({
   imports: [
