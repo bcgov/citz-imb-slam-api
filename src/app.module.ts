@@ -4,7 +4,7 @@ import { SoftwareModule } from './software/software.module';
 import { ConfigModule } from '@nestjs/config';
 
 const env = {
-  host: process.env.HOST || 'localhost',
+  host: process.env.SLAM_DB_SERVICE_SERVICE_HOST || 'localhost',
   port: 5432,
   username: process.env.POSTGRES_USER || 'postgres',
   password: process.env.POSTGRES_PASSWORD || 'snowball',
