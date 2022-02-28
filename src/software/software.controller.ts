@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { SoftwareTitle } from './software.entity';
 import { SoftwareService } from './software.service';
