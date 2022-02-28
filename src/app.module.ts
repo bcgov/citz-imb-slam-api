@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SoftwareModule } from './software/software.module';
 import { ConfigModule } from '@nestjs/config';
 import 'dotenv/config';
+import { SoftwareTitle } from './software/software.entity';
 
 console.log(
   'process.env.POSTGRES_SYNCHRONIZE',
@@ -32,7 +33,7 @@ console.log('process.env', process.env);
       username: env.username,
       password: env.password,
       database: env.database,
-      entities: ['dist/**/*.entity{.ts,.js}'],
+      entities: [SoftwareTitle],
       synchronize: env.synchronize,
     }),
   ],

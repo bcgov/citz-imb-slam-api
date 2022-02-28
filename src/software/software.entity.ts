@@ -1,14 +1,23 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
-@Entity()
-export class SoftwareTitle {
+@Entity('software_title')
+export class SoftwareTitle extends BaseEntity {
   @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @ApiProperty()
-  @Column()
+  @Column({
+    unique: true,
+  })
   title: string;
 
   @ApiProperty()
@@ -18,4 +27,10 @@ export class SoftwareTitle {
   @ApiProperty()
   @Column()
   administrator: string;
+
+  @CreateDateColumn()
+  created: Date;
+
+  @UpdateDateColumn()
+  modified: Date;
 }
