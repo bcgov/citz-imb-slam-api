@@ -2,6 +2,12 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SoftwareModule } from './software/software.module';
 import { ConfigModule } from '@nestjs/config';
+import 'dotenv/config';
+
+console.log(
+  'process.env.POSTGRES_SYNCHRONIZE',
+  process.env.POSTGRES_SYNCHRONIZE,
+);
 
 const env = {
   host: process.env.SLAM_DB_SERVICE_SERVICE_HOST || 'localhost',

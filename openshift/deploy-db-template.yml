@@ -39,6 +39,16 @@ objects:
                     secretKeyRef:
                       name: slam-db
                       key: POSTGRES_PASSWORD
+                - name: POSTGRES_DATABASE
+                  valueFrom:
+                    secretKeyRef:
+                      name: slam-db
+                      key: POSTGRES_DATABASE
+                - name: POSTGRES_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: slam-db
+                      key: POSTGRES_USER
 
   - kind: Service
     apiVersion: v1
