@@ -1,9 +1,21 @@
+# Database Setup
+Only needs to be completed once per namespace, unless configuration changes.
+
+Does not need to be done again if database schema (ie tables, columns, etc.) changes.  Dev environment will automatically update.  Process for updating test and prod to be developed.
+
+1. Setup OpenShift Secrets
+
+    - Secret name = slam-db
+    - Keys:
+        - POSTGRES_DATABASE - the name of the database
+        - POSTGRES_PASSWORD - the password for the database
+        - POSTGRES_USER - the name of the user for the database
+        - POSTGRES_SYNCHRONIZE - set to true for dev environment, false for test and prod
+
+2. Login to OC command line, changing to the openshift directory
+
+3. Run the following, changing _<OPENSHIFT_NAMESPACE>_ for the appropriate namespace
+
 ```
-oc process -f ./deploy-db-template.yml -p NAMESPACE=${{ secrets.OPENSHIFT_NAMESPACE }} | oc apply -f -
+oc process -f ./deploy-db-template.yml -p NAMESPACE=<OPENSHIFT_NAMESPACE> | oc apply -f -
 ```
-
-oc process -f ./deploy-db-template.yml -p NAMESPACE=ca94a8-tools | oc apply -f -
-
-oc process -f ./deploy-api-template.yml -p NAMESPACE=ca94a8-tools -p TAG=7da5e18 -p PORT=3000 | oc apply -f -
-
-docker run --name slam-db -p 5432:5432 -e POSTGRES_PASSWORD=snowball -e POSTGRES_DB=slam-db -d postgres:14.2-alpine3.15
