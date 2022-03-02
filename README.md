@@ -1,9 +1,10 @@
+![GitHub](https://img.shields.io/github/license/bcgov/citz-imb)
+[![CICD SLAM-APP](https://github.com/bcgov/citz-imb-slam-app/actions/workflows/CICD.yml/badge.svg)](https://github.com/bcgov/citz-imb-slam-app/actions/workflows/CICD.yml)
+[![CICD SLAM-API](https://github.com/bcgov/citz-imb-slam-api/actions/workflows/CICD.yml/badge.svg)](https://github.com/bcgov/citz-imb-slam-api/actions/workflows/CICD.yml)
+
 [![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)](<Redirect-URL>)
 The project is in the very early stages of development. The codebase will be changing frequently.
 
-![GitHub](https://img.shields.io/github/license/bcgov/citz-imb)
-
-[![CICD SLAM-API](https://github.com/bcgov/citz-imb-slam-api/actions/workflows/CICD.yml/badge.svg)](https://github.com/bcgov/citz-imb-slam-api/actions/workflows/CICD.yml)
 
 # Software Licence and Application Management (SLAM-API)
 This is the API Server (backend) for the [SLAM application](https://github.com/bcgov/citz-imb-slam-app)
