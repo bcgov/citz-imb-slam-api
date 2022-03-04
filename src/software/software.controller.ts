@@ -4,6 +4,13 @@ import { SoftwareTitle } from './software.entity';
 import { SoftwareService } from './software.service';
 
 @Crud({
+  params: {
+    id: {
+      field: 'id',
+      type: 'uuid',
+      primary: true,
+    },
+  },
   model: {
     type: SoftwareTitle,
   },
