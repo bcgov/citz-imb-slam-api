@@ -1,3 +1,18 @@
+import { CrudConfigService } from '@nestjsx/crud';
+// Important: load config before (!!!) you import AppModule
+// https://github.com/nestjsx/crud/wiki/Controllers#global-options
+CrudConfigService.load({
+  routes: {
+    only: [
+      'getManyBase',
+      'getOneBase',
+      'createOneBase',
+      'updateOneBase',
+      'deleteOneBase',
+    ],
+  },
+});
+
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
