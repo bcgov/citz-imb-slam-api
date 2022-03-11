@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
-import { SoftwareTitle } from './software.entity';
+import { SoftwareTitleEntity } from './software.entity';
 import { SoftwareService } from './software.service';
 
 @Crud({
@@ -12,10 +12,17 @@ import { SoftwareService } from './software.service';
     },
   },
   model: {
-    type: SoftwareTitle,
+    type: SoftwareTitleEntity,
+  },
+  query: {
+    join: {
+      user: {
+        eager: true,
+      },
+    },
   },
 })
 @Controller('software')
-export class SoftwareController implements CrudController<SoftwareTitle> {
+export class SoftwareController implements CrudController<SoftwareTitleEntity> {
   constructor(public service: SoftwareService) {}
 }

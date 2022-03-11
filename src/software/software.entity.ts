@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { User } from 'src/user/user.entity';
+import { UserEntity } from 'src/user/user.entity';
 import {
-  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -10,9 +9,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { GenericEntity } from 'src/common/generic.entity';
 
-@Entity('software_title')
-export class SoftwareTitle extends BaseEntity {
+@Entity('software_titles')
+export class SoftwareTitleEntity extends GenericEntity {
   @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -37,7 +37,7 @@ export class SoftwareTitle extends BaseEntity {
   @UpdateDateColumn()
   modified: Date;
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => UserEntity)
   @JoinTable()
-  licencee: User;
+  licencee: UserEntity;
 }

@@ -4,7 +4,7 @@ https://docs.nestjs.com/controllers#controllers
 import { Crud, CrudController } from '@nestjsx/crud';
 import { Controller } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from './user.entity';
+import { UserEntity } from './user.entity';
 
 @Crud({
   params: {
@@ -14,9 +14,9 @@ import { User } from './user.entity';
       primary: true,
     },
   },
-  model: { type: User },
+  model: { type: UserEntity },
 })
 @Controller('user')
-export class UserController implements CrudController<User> {
+export class UserController implements CrudController<UserEntity> {
   constructor(public service: UserService) {}
 }
