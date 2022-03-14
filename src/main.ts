@@ -1,5 +1,5 @@
 import { CrudConfigService } from '@nestjsx/crud';
-// Important: load config before (!!!) you import AppModule
+//! Important: load config before (!!!) you import AppModule
 // https://github.com/nestjsx/crud/wiki/Controllers#global-options
 CrudConfigService.load({
   routes: {

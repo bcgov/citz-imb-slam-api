@@ -1,11 +1,12 @@
+import { SoftwareUserModule } from './software-user/software-user.module';
 import { UserModule } from './user/user.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import 'dotenv/config';
-import { SoftwareTitle } from './software/software.entity';
+import { SoftwareTitleEntity } from './software/software.entity';
 import { SoftwareModule } from './software/software.module';
-import { User } from './user/user.entity';
+import { UserEntity } from './user/user.entity';
 
 const env = {
   host: process.env.SLAM_DB_SERVICE_SERVICE_HOST || 'localhost',
@@ -17,6 +18,7 @@ const env = {
 };
 @Module({
   imports: [
+    SoftwareUserModule,
     UserModule,
     ConfigModule.forRoot(),
     SoftwareModule,
@@ -27,7 +29,7 @@ const env = {
       username: env.username,
       password: env.password,
       database: env.database,
-      entities: [SoftwareTitle, User],
+      entities: [SoftwareTitleEntity, UserEntity],
       synchronize: env.synchronize,
     }),
   ],

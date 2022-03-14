@@ -1,28 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  BaseEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { GenericEntity } from 'src/common/generic.entity';
+import { SoftwareUserEntity } from 'src/software-user/software-user.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
-@Entity('licencee')
-export class User extends BaseEntity {
-  @ApiProperty()
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+@Entity('licencees')
+export class UserEntity extends GenericEntity {
   @ApiProperty()
   @Column({
     unique: true,
   })
   title: string;
 
-  @CreateDateColumn()
-  created: Date;
-
-  @UpdateDateColumn()
-  modified: Date;
+  @OneToMany(() => SoftwareUserEntity, (softwareUser) => softwareUser.id)
+  softwareUser: SoftwareUserEntity[];
 }
