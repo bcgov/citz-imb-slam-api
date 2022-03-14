@@ -31,6 +31,19 @@ export class SoftwareTitle extends BaseEntity {
   @Column()
   administrator: string;
 
+  @ApiProperty()
+  @Column({
+    default: 0,
+    nullable: true,
+  })
+  quantity: number;
+
+  @ApiProperty()
+  @Column({
+    nullable: true,
+  })
+  renewal: Date;
+
   @CreateDateColumn()
   created: Date;
 
