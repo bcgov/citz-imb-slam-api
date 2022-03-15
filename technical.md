@@ -6,8 +6,8 @@ All id fields are of type UUID
 
 ```mermaid
 erDiagram
-    licensee ||--o{ assigned-license: is
-    software ||--o{ assigned-license: has
+    licensee ||--o{ assigned-license: "is assigned"
+    software ||--o{ assigned-license: "is assigned to"
     licensee {
         string id
         string name
