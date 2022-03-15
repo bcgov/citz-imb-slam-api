@@ -4,7 +4,7 @@
 
 ```mermaid
 erDiagram
-    licensee ||--|{ software-licensee: assigned 
+    licensee [||--|{ software-licensee: assigned license]
     software ||--|{ software-licensee: uses
     software-licensee
 ```
