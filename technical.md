@@ -2,7 +2,7 @@
 
 All id fields are of type UUID
 
-## Entity Diagrams
+## Entity Diagram
 
 ```mermaid
 erDiagram
