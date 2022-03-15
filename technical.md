@@ -6,7 +6,7 @@
 erDiagram
     licensee ||--|| assigned-license: is
     licensee {
-        string id
+        string id "uuid"
         string title
         string publisher
         string administrator
