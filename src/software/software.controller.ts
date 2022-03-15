@@ -14,13 +14,13 @@ import { SoftwareService } from './software.service';
   model: {
     type: SoftwareTitleEntity,
   },
-  query: {
-    join: {
-      user: {
-        eager: true,
-      },
-    },
-  },
+  // query: {
+  //   join: {
+  //     user: {
+  //       eager: true,
+  //     },
+  //   },
+  // },
 })
 @Controller('software')
 export class SoftwareController implements CrudController<SoftwareTitleEntity> {

@@ -1,12 +1,13 @@
-import { SoftwareUserModule } from './software-user/software-user.module';
-import { UserModule } from './user/user.module';
+import { LicenseeModule } from './licensee/licensee.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import 'dotenv/config';
 import { SoftwareTitleEntity } from './software/software.entity';
 import { SoftwareModule } from './software/software.module';
-import { UserEntity } from './user/user.entity';
+import { LicenseeEntity } from './licensee/licensee.entity';
+import { AssignedLicenseModule } from './assignedLicense/assignedLicense.module';
+import { AssignedLicenseEntity } from './assignedLicense/assignedLicense.entity';
 
 const env = {
   host: process.env.SLAM_DB_SERVICE_SERVICE_HOST || 'localhost',
@@ -18,8 +19,8 @@ const env = {
 };
 @Module({
   imports: [
-    SoftwareUserModule,
-    UserModule,
+    AssignedLicenseModule,
+    LicenseeModule,
     ConfigModule.forRoot(),
     SoftwareModule,
     TypeOrmModule.forRoot({
@@ -29,7 +30,7 @@ const env = {
       username: env.username,
       password: env.password,
       database: env.database,
-      entities: [SoftwareTitleEntity, UserEntity],
+      entities: [SoftwareTitleEntity, LicenseeEntity, AssignedLicenseEntity],
       synchronize: env.synchronize,
     }),
   ],

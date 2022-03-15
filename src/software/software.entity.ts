@@ -1,22 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UserEntity } from 'src/user/user.entity';
+import { AssignedLicenseEntity } from 'src/assignedLicense/assignedLicense.entity';
+import { GenericEntity } from 'src/common/generic.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
+  OneToMany,
   UpdateDateColumn,
 } from 'typeorm';
-import { GenericEntity } from 'src/common/generic.entity';
 
 @Entity('software_titles')
 export class SoftwareTitleEntity extends GenericEntity {
-  @ApiProperty()
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
   @ApiProperty()
   @Column({
     unique: true,
@@ -50,7 +44,6 @@ export class SoftwareTitleEntity extends GenericEntity {
   @UpdateDateColumn()
   modified: Date;
 
-  @ManyToMany(() => UserEntity)
-  @JoinTable()
-  licencee: UserEntity;
+  @OneToMany(() => AssignedLicenseEntity, (sl) => sl.software)
+  licenseeConnection: Promise<AssignedLicenseEntity>;
 }
