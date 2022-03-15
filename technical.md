@@ -6,13 +6,6 @@ All id fields are of type UUID
 
 ```mermaid
 erDiagram
-    assigned-licence {
-        string id
-        string licenseeId
-        string softwareId
-        date created
-        date modified
-    }
     licensee ||--|| assigned-license: is
     licensee {
         string id
@@ -28,6 +21,13 @@ erDiagram
         string title
         string publisher
         string administrator
+        date created
+        date modified
+    }
+    assigned-licence {
+        string id
+        string licenseeId
+        string softwareId
         date created
         date modified
     }
