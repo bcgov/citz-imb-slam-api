@@ -24,7 +24,7 @@ erDiagram
         date created
         date modified
     }
-    assigned-licence {
+    assigned-license {
         string id
         string licenseeId
         string softwareId
