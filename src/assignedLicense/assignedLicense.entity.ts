@@ -4,7 +4,7 @@ import { LicenseeEntity } from 'src/licensee/licensee.entity';
 import { SoftwareTitleEntity } from 'src/software/software.entity';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
-@Entity('software_licensee')
+@Entity('assigned_license')
 export class AssignedLicenseEntity extends GenericEntity {
   @ApiProperty()
   @Column()
@@ -22,9 +22,9 @@ export class AssignedLicenseEntity extends GenericEntity {
   @JoinColumn({ name: 'softwareId' })
   software: Promise<SoftwareTitleEntity>;
 
-  @ManyToOne(() => LicenseeEntity, (licencee) => licencee.softwareConnection, {
+  @ManyToOne(() => LicenseeEntity, (licensee) => licensee.softwareConnection, {
     primary: true,
   })
   @JoinColumn({ name: 'licenseeId' })
-  licencee: Promise<LicenseeEntity>;
+  licensee: Promise<LicenseeEntity>;
 }

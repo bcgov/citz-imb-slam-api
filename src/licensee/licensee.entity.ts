@@ -11,6 +11,6 @@ export class LicenseeEntity extends GenericEntity {
   })
   name: string;
 
-  @OneToMany(() => AssignedLicenseEntity, (sl) => sl.licencee)
+  @OneToMany(() => AssignedLicenseEntity, (sl) => sl.licensee)
   softwareConnection: Promise<AssignedLicenseEntity[]>;
 }

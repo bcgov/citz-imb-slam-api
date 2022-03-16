@@ -7,7 +7,7 @@ CrudConfigService.load({
       'getManyBase',
       'getOneBase',
       'createOneBase',
-      'updateOneBase',
+      'replaceOneBase',
       'deleteOneBase',
     ],
   },

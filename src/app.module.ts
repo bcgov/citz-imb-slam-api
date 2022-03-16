@@ -1,13 +1,13 @@
-import { LicenseeModule } from './licensee/licensee.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import 'dotenv/config';
+import { AssignedLicenseEntity } from './assignedLicense/assignedLicense.entity';
+import { AssignedLicenseModule } from './assignedLicense/assignedLicense.module';
+import { LicenseeEntity } from './licensee/licensee.entity';
+import { LicenseeModule } from './licensee/licensee.module';
 import { SoftwareTitleEntity } from './software/software.entity';
 import { SoftwareModule } from './software/software.module';
-import { LicenseeEntity } from './licensee/licensee.entity';
-import { AssignedLicenseModule } from './assignedLicense/assignedLicense.module';
-import { AssignedLicenseEntity } from './assignedLicense/assignedLicense.entity';
 
 const env = {
   host: process.env.SLAM_DB_SERVICE_SERVICE_HOST || 'localhost',
