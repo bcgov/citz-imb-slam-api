@@ -18,7 +18,10 @@ import { SoftwareService } from './software.service';
     join: {
       licenseeConnection: {
         eager: true,
-        alias: 'assignedLicences',
+        alias: 'assignedLicenses',
+      },
+      'licenseeConnection.licensee': {
+        eager: true,
       },
     },
   },
