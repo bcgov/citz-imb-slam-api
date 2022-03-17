@@ -38,11 +38,9 @@ export class SoftwareTitleEntity extends GenericEntity {
   })
   renewal: Date;
 
-  @CreateDateColumn()
-  created: Date;
-
-  @UpdateDateColumn()
-  modified: Date;
+  @ApiProperty()
+  @Column('text', { nullable: true })
+  notes: string;
 
   @OneToMany(() => AssignedLicenseEntity, (sl) => sl.software)
   licenseeConnection: Promise<AssignedLicenseEntity>;

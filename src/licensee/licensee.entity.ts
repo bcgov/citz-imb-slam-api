@@ -11,6 +11,10 @@ export class LicenseeEntity extends GenericEntity {
   })
   name: string;
 
+  @ApiProperty()
+  @Column('text', { nullable: true })
+  notes: string;
+
   @OneToMany(() => AssignedLicenseEntity, (sl) => sl.licensee)
   softwareConnection: Promise<AssignedLicenseEntity[]>;
 }
