@@ -15,6 +15,17 @@ import { LicenseeEntity } from './licensee.entity';
     },
   },
   model: { type: LicenseeEntity },
+  query: {
+    join: {
+      softwareConnection: {
+        eager: true,
+        alias: 'assignedLicenses',
+      },
+      'softwareConnection.software': {
+        eager: true,
+      },
+    },
+  },
 })
 @Controller('licensee')
 export class LicenseeController implements CrudController<LicenseeEntity> {
