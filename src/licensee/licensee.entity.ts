@@ -15,6 +15,8 @@ export class LicenseeEntity extends GenericEntity {
   @Column('text', { nullable: true })
   notes: string;
 
-  @OneToMany(() => AssignedLicenseEntity, (sl) => sl.licensee)
+  @OneToMany(() => AssignedLicenseEntity, (sl) => sl.licensee, {
+    cascade: true,
+  })
   softwareConnection: Promise<AssignedLicenseEntity[]>;
 }

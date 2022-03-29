@@ -7,7 +7,16 @@ import { Crud, CrudController } from '@nestjsx/crud';
 import { AssignedLicenseEntity } from './assignedLicense.entity';
 import { AssignedLicenseService } from './assignedLicense.service';
 
-@Crud({ model: { type: AssignedLicenseEntity } })
+@Crud({
+  params: {
+    id: {
+      field: 'id',
+      type: 'uuid',
+      primary: true,
+    },
+  },
+  model: { type: AssignedLicenseEntity },
+})
 @Controller('assigned-license')
 export class AssignedLicenseController
   implements CrudController<AssignedLicenseEntity>
