@@ -1,4 +1,7 @@
+import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { CrudConfigService } from '@nestjsx/crud';
+
 //! Important: load config before (!!!) you import AppModule
 // https://github.com/nestjsx/crud/wiki/Controllers#global-options
 CrudConfigService.load({
@@ -13,8 +16,6 @@ CrudConfigService.load({
   },
 });
 
-import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {

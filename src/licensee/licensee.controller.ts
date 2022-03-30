@@ -1,10 +1,10 @@
 /*
 https://docs.nestjs.com/controllers#controllers
 */
-import { Crud, CrudController } from '@nestjsx/crud';
 import { Controller } from '@nestjs/common';
-import { LicenseeService } from './licensee.service';
+import { Crud, CrudController } from '@nestjsx/crud';
 import { LicenseeEntity } from './licensee.entity';
+import { LicenseeService } from './licensee.service';
 
 @Crud({
   params: {

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { GenericEntity } from 'src/common/generic.entity';
 import { AssignedLicenseEntity } from 'src/assignedLicense/assignedLicense.entity';
+import { GenericEntity } from 'src/common/generic.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('licensees')
