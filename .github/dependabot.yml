@@ -1,6 +1,6 @@
 version: 2
 updates:
-  # npm dependencies - frontend
+  # npm dependencies
   - package-ecosystem: "npm"
     directory: "./"
     open-pull-requests-limit: 4
