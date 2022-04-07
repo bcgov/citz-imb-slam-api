@@ -26,9 +26,5 @@ docker-compose up -d
 
 You should see a slam-api and slam-db container in your Docker Desktop.
 
-#### database
-```
-docker run --name slam-db -p 5432:5432 -e POSTGRES_PASSWORD=****** -e POSTGRES_DB=slam-db -d postgres:14.2-alpine3.15
-```
 ### CICD Pipeline
  Commits and Pull Requests to the Main branch trigger the CICD pipeline.  The Pipeline will build the image, run tests, and deploy to prod.  If the commit contains the __#release__ in the commit message, it will deploy to the test environment.  After User Acceptance Testing is approved, it will deploy to production.  Deployment to both test and prod trigger a notification in our Teams workspace.
