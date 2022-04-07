@@ -16,6 +16,16 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 
 ### Developer workstation setup
 
+First create a local `.env` at the root of the repository based off [.env.template](.env.template). 
+
+run
+
+```bash
+docker-compose up -d
+```
+
+You should see a slam-api and slam-db container in your Docker Desktop.
+
 #### database
 ```
 docker run --name slam-db -p 5432:5432 -e POSTGRES_PASSWORD=****** -e POSTGRES_DB=slam-db -d postgres:14.2-alpine3.15
