@@ -26,7 +26,7 @@ const env = {
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: env.host,
-      port: 5432,
+      port: env.POSTGRES_PORT,
       username: env.username,
       password: env.password,
       database: env.database,
