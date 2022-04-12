@@ -10,8 +10,8 @@ import { SoftwareTitleEntity } from './software/software.entity';
 import { SoftwareModule } from './software/software.module';
 
 const env = {
-  host: process.env.POSTGRES_HOST || 'localhost',
-  port: 5432,
+  host: process.env.POSTGRES_HOST,
+  port: process.env.POSTGRES_PORT,
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
@@ -21,12 +21,12 @@ const env = {
   imports: [
     AssignedLicenseModule,
     LicenseeModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({}),
     SoftwareModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: env.host,
-      port: env.port,
+      port: 5432,
       username: env.username,
       password: env.password,
       database: env.database,

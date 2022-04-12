@@ -1,4 +1,8 @@
-FROM node:17.5.0-alpine3.14
+###############################################################################
+###                             Pre-Build                                   ###
+###############################################################################
+
+FROM node:17.5.0-alpine3.14 as build
 
 WORKDIR /app
 
@@ -6,14 +10,27 @@ COPY package.json package-lock.json ./
 
 RUN npm install
 
+COPY . .
+
 RUN npm run build
 
-COPY ./dist .
+###############################################################################
+###                             Build                                       ###
+###############################################################################
 
-EXPOSE 3000
+FROM node:17.5.0-alpine3.14
 
-RUN chown -R node:node /app
+ARG NODE_ENV=Production
+ENV NODE_ENV=${NODE_ENV}
 
-USER node
+WORKDIR /app
 
-CMD node main.js
+COPY package.json package-lock.json ./
+
+RUN npm install
+
+COPY . .
+
+COPY --from=build /app/dist ./dist
+
+CMD ["node", "dist/main.js"]
