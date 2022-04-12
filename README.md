@@ -16,9 +16,25 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 
 ### Developer workstation setup
 
-#### database
+Create a .env file at the root of the project directory.
+
+Copy the list of variables from the .env-template into your .env file.
+
+| Variable          | Required  | Development Value     |
+|-------------------|:---------:|----------------------:|
+| POSTGRES_USER     | Y         | postgres              |
+| POSTGRES_PASSWORD | Y         | snowball              |
+| POSTGRES_DB       | Y         | slam-db               |
+| POSTGRES_HOST     | Y         | postgres              |
+| POSTGRES_SYNCRONIZE | Y       | true                  |
+| POSRGRES_PORT     |           | 5432                  |
+
+Run the following command into local terminal:
+
 ```
-docker run --name slam-db -p 5432:5432 -e POSTGRES_PASSWORD=****** -e POSTGRES_DB=slam-db -d postgres:14.2-alpine3.15
+docker-compose up --build postgres slam-api pg-admin
 ```
+The following output in terminal should show that all components of the SLAM! Application are healthy docker containers.
+
 ### CICD Pipeline
  Commits and Pull Requests to the Main branch trigger the CICD pipeline.  The Pipeline will build the image, run tests, and deploy to prod.  If the commit contains the __#release__ in the commit message, it will deploy to the test environment.  After User Acceptance Testing is approved, it will deploy to production.  Deployment to both test and prod trigger a notification in our Teams workspace.
