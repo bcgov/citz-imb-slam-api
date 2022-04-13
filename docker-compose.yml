@@ -13,7 +13,7 @@ services:
     ports:
       - 5432:5432
     env_file:
-      - docker.env
+      - .env
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-snowball}
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
@@ -32,7 +32,7 @@ services:
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
        - pgadmin:/var/lib/pgadmin
-    
+
     ports:
       - "${PGADMIN_PORT:-5050}:80"
     networks:
@@ -51,8 +51,8 @@ services:
     ports:
       - 3000:3000
     env_file:
-      - docker.env
-    environment: 
+      - .env
+    environment:
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_HOST=${POSTGRES_HOST:-postgres}
       - POSTGRES_DB=${POSTGRES_DB:-slam-db}
@@ -60,7 +60,7 @@ services:
       - POSTGRES_SYNCHRONIZE=${POSTGRES_SYNCHRONIZE:-true}
     depends_on:
       - postgres
-  
+
 networks:
   slam-net:
     driver: "bridge"
