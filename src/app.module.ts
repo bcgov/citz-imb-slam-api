@@ -10,18 +10,18 @@ import { SoftwareTitleEntity } from './software/software.entity';
 import { SoftwareModule } from './software/software.module';
 
 const env = {
-  host: process.env.SLAM_DB_SERVICE_SERVICE_HOST || 'localhost',
-  port: 5432,
+  host: process.env.POSTGRES_HOST,
+  port: Number(process.env.POSTGRES_PORT),
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
-  database: process.env.POSTGRES_DATABASE,
+  database: process.env.POSTGRES_DB,
   synchronize: process.env.POSTGRES_SYNCHRONIZE === 'true' || false,
 };
 @Module({
   imports: [
     AssignedLicenseModule,
     LicenseeModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({}),
     SoftwareModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
