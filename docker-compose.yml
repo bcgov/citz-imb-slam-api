@@ -60,6 +60,7 @@ services:
       - POSTGRES_SYNCHRONIZE=${POSTGRES_SYNCHRONIZE:-true}
     depends_on:
       - postgres
+    command: ["npm", "run", "dev:watch"]  
 
 networks:
   slam-net:
