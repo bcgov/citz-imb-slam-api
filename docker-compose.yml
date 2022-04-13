@@ -1,9 +1,8 @@
 version: '3.8'
 services:
-
-###############################################################################
-###                       POSTGRES DB Container                             ###
-###############################################################################
+  ###############################################################################
+  ###                       POSTGRES DB Container                             ###
+  ###############################################################################
   postgres:
     container_name: postgres
     image: postgres:14.2-alpine3.15
@@ -18,11 +17,11 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-snowball}
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_DB=${POSTGRES_DB:-slam-db}
-    command: ["postgres", "-c", "logging_collector=on"]
+    command: ['postgres', '-c', 'logging_collector=on']
 
-###############################################################################
-###                       POSTGRES ADMIN DB Container                       ###
-###############################################################################
+  ###############################################################################
+  ###                       POSTGRES ADMIN DB Container                       ###
+  ###############################################################################
   pgadmin:
     container_name: pg-admin
     image: dpage/pgadmin4
@@ -31,17 +30,17 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
-       - pgadmin:/var/lib/pgadmin
+      - pgadmin:/var/lib/pgadmin
 
     ports:
-      - "${PGADMIN_PORT:-5050}:80"
+      - '${PGADMIN_PORT:-5050}:80'
     networks:
       - slam-net
     restart: unless-stopped
 
-###############################################################################
-###                              SLAM API                                   ###
-###############################################################################
+  ###############################################################################
+  ###                              SLAM API                                   ###
+  ###############################################################################
   slam-api:
     container_name: slam-api
     build:
@@ -58,14 +57,18 @@ services:
       - POSTGRES_DB=${POSTGRES_DB:-slam-db}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-snowball}
       - POSTGRES_SYNCHRONIZE=${POSTGRES_SYNCHRONIZE:-true}
+    volumes:
+      - ./citz-imb-slam-api:/src/
+      - nodemodules:/node_modules
     depends_on:
       - postgres
-    command: ["npm", "run", "dev:watch"]  
+    command: ['npm', 'run', 'dev']
 
 networks:
   slam-net:
-    driver: "bridge"
+    driver: 'bridge'
 
 volumes:
-    postgres:
-    pgadmin:
+  postgres:
+  pgadmin:
+  nodemodules: {}
