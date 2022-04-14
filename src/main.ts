@@ -1,5 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
 import { CrudConfigService } from '@nestjsx/crud';
 
 //! Important: load config before (!!!) you import AppModule
