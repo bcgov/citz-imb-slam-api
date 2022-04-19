@@ -1,0 +1,97 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: ''
+    app.openshift.io/vcs-uri: 'https://github.com/bcgov/citz-imb-slam-api'
+    openshift.io/generated-by: OpenShiftWebConsole
+  resourceVersion: '3302778473'
+  name: ${APPLICATION_NAME}
+  uid: 173ca37b-f085-486d-8113-102cacec2650
+  creationTimestamp: '2022-04-19T16:38:44Z'
+  generation: 9
+  namespace: ${LICENSE_PLATE}-${ENVIRONMENT}
+  labels:
+    app: ${APPLICATION_NAME}
+    app.kubernetes.io/component: ${APPLICATION_NAME}
+    app.kubernetes.io/instance: ${APPLICATION_NAME}
+    app.kubernetes.io/name: ${APPLICATION_NAME}
+    app.kubernetes.io/part-of: citz-imb-slam
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - ${APPLICATION_NAME}
+        from:
+          kind: ImageStreamTag
+          namespace: ${LICENSE_PLATE}-${ENVIRONMENT}
+          name: '${APPLICATION_NAME}:latest'
+    - type: ConfigChange
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    app: ${APPLICATION_NAME}
+    deploymentconfig: ${APPLICATION_NAME}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ${APPLICATION_NAME}
+        deploymentconfig: ${APPLICATION_NAME}
+        role: api
+    spec:
+      containers:
+        - name: ${APPLICATION_NAME}
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/ca94a8-dev/citz-imb-slam-api-dc@sha256:89b1b50733c6e9c5b97874fcf4e8c7c2669ac3e6092dd2bcdc39ab618724bd37
+          envFrom:
+            - secretRef:
+                name: slam-db-user-creds
+          env:
+            - name: POSTGRES_DATABASE
+              value: postgres
+            - name: POSTGRES_HOST
+              value: slam-db-service
+            - name: POSTGRES_SYNCHRONIZE
+              value: 'true'
+            - name: POSTGRES_PORT
+              value: '5432'
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+
+parameters:
+- description: Application Name
+  displayName: AppName
+  name: APPLICATION_NAME
+  required: true
+  value: citz-imb-slam-api-dc
+- description: License Plate
+  displayName: License Plate
+  name: LICENSE_PLATE
+  required: true
+  value: ca94a8
+- description: Environment
+  displayName: Environment
+  name: ENVIRONMENT
+  required: true
+  value: dev
