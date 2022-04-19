@@ -31,11 +31,11 @@ jobs:
           
       - name: Docker Tag Version
         run: |  
-          docker tag jag-efax_webservice ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/${{ secrets.OPENSHIFT4_TOOLS_NAMESPACE }}/jag-efax-webservice:${{ env.LATEST_VERSION }}
+          docker tag slam-api ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/${{ secrets.OPENSHIFT4_TOOLS_NAMESPACE }}/slam-api:latest
           
       - name: Docker Push Version
         run: |  
-          docker push ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/${{ secrets.OPENSHIFT4_TOOLS_NAMESPACE }}/jag-efax-webservice:${{ env.LATEST_VERSION }}    
+          docker push ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/${{ secrets.OPENSHIFT4_TOOLS_NAMESPACE }}/slam-api:latest
       
       - name: Deploy to DEV
         env:
@@ -44,7 +44,7 @@ jobs:
           LICENSE_PLATE: "${{ secrets.LICENSE_PLATE }}"
           ENVIRONMENT: "${{ secrets.ENVIRONMENT }}"
         run: |  
-          ./.github/helpers/deploy_efax.sh ${{ env.LATEST_VERSION }}
+          ./.github/helpers/deploy_api.sh ${{ env.LATEST_VERSION }}
           
       - name: Health Check DEV deployment
         env:
