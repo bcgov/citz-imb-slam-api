@@ -5,5 +5,5 @@
 oc process -f /home/runner/work/citz-imb-slam-api/citz-imb-slam-api/openshift/templates/api/dc.yaml -n $NAMESPACE \
     -p APPLICATION_NAME=$APPLICATION_NAME \
     -p LICENSE_PLATE=$LICENSE_PLATE \
-    -p ENVIRONMENT=$ENVIRONMENT \
+    -p ENVIRONMENT=$ENVIRONMENT | \
     oc apply -f -
