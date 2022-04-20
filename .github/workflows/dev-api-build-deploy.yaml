@@ -35,7 +35,7 @@ jobs:
           
       - name: Docker Tag Version
         run: |  
-          docker tag citz-imb-slam-api_slam-api ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/slam-api:latest
+          docker tag citz-imb-slam-api_slam-api ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}:latest
           
       - name: Docker Push Version
         run: |  
