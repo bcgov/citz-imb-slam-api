@@ -39,7 +39,7 @@ jobs:
           
       - name: Docker Push Version
         run: |  
-          docker push ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/${{ secrets.OPENSHIFT4_DEV_NAMESPACE }}/citz-imb-slam-api-dc:latest
+          docker push ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/slam-api:latest
       
       - name: Deploy to DEV
         env:
