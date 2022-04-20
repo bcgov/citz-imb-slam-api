@@ -31,11 +31,11 @@ jobs:
           
       - name: Docker Tag Version
         run: |  
-          docker tag slam-api ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/${{ secrets.OPENSHIFT4_DEV_NAMESPACE }}/slam-api:latest
+          docker tag slam-api ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/${{ secrets.OPENSHIFT4_DEV_NAMESPACE }}/citz-imb-slam-api-dc:latest
           
       - name: Docker Push Version
         run: |  
-          docker push ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/${{ secrets.OPENSHIFT4_DEV_NAMESPACE }}/slam-api:latest
+          docker push ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/${{ secrets.OPENSHIFT4_DEV_NAMESPACE }}/citz-imb-slam-api-dc:latest
       
       - name: Deploy to DEV
         env:
