@@ -36,7 +36,7 @@ spec:
           - ${APPLICATION_NAME}
         from:
           kind: ImageStreamTag
-          namespace: ${LICENSE_PLATE}-${ENVIRONMENT}
+          namespace: ${LICENSE_PLATE}-dev
           name: '${APPLICATION_NAME}:latest'
     - type: ConfigChange
   replicas: 1
