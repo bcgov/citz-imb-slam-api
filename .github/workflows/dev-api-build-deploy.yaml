@@ -31,11 +31,11 @@ jobs:
           
       - name: Docker List Images
         run: |  
-          docker images ls
+          docker image ls
           
       - name: Docker Tag Version
         run: |  
-          docker tag slam-api ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}:latest
+          docker tag citz-imb-slam-api_slam-api ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/slam-api:latest
           
       - name: Docker Push Version
         run: |  
