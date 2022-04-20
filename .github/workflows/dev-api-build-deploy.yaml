@@ -29,6 +29,10 @@ jobs:
         run: |            
           docker-compose build slam-api
           
+      - name: Docker List Images
+        run: |  
+          docker images ls
+          
       - name: Docker Tag Version
         run: |  
           docker tag slam-api ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}:latest
