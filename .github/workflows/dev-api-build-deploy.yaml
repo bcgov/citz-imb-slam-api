@@ -39,7 +39,7 @@ jobs:
           
       - name: Docker Push Version
         run: |  
-          docker push ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/slam-api:latest
+          docker push ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}:latest
       
       - name: Deploy to DEV
         env:
