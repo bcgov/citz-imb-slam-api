@@ -29,17 +29,17 @@ jobs:
         run: |            
           docker-compose build slam-api
           
-      - name: Docker List Images
-        run: |  
-          docker image ls
-          
       - name: Docker Tag Version
         run: |  
           docker tag citz-imb-slam-api_slam-api ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}:latest
           
+      - name: Docker List Images
+        run: |  
+          docker image ls
+          
       - name: Docker Push Version
         run: |  
-          docker push ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/slam-api:latest
+          docker push ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}:latest
       
       - name: Deploy to DEV
         env:
