@@ -10,7 +10,7 @@ metadata:
   uid: 173ca37b-f085-486d-8113-102cacec2650
   creationTimestamp: '2022-04-19T16:38:44Z'
   generation: 9
-  namespace: ${LICENSE_PLATE}-${ENVIRONMENT}
+  namespace: ${NAMESPACE}
   labels:
     app: ${APPLICATION_NAME}
     app.kubernetes.io/component: ${APPLICATION_NAME}
@@ -36,7 +36,7 @@ spec:
           - ${APPLICATION_NAME}
         from:
           kind: ImageStreamTag
-          namespace: ${LICENSE_PLATE}-dev
+          namespace: ${NAMESPACE}
           name: '${APPLICATION_NAME}:latest'
     - type: ConfigChange
   replicas: 1
@@ -95,3 +95,7 @@ parameters:
   name: ENVIRONMENT
   required: true
   value: dev
+- description: NameSpace
+  displayName: Namespace
+  name: NAMESPACE
+  required: true
