@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
   creationTimestamp: null
@@ -13,10 +13,7 @@ objects:
       app.openshift.io/vcs-ref: ''
       app.openshift.io/vcs-uri: 'https://github.com/bcgov/citz-imb-slam-api'
       openshift.io/generated-by: OpenShiftWebConsole
-    resourceVersion: '3302778473'
     name: ${APPLICATION_NAME}
-    uid: 173ca37b-f085-486d-8113-102cacec2650
-    creationTimestamp: '2022-04-19T16:38:44Z'
     generation: 9
     namespace: ${LICENSE_PLATE}-${ENVIRONMENT}
     labels:
