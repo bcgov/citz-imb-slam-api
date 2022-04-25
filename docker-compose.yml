@@ -46,7 +46,7 @@ services:
     networks:
       - slam-net
     ports:
-      - 3000:3000
+      - 3001:3001
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_HOST=${POSTGRES_HOST:-postgres}
