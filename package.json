@@ -21,13 +21,13 @@
     "dev": "npm run start:dev"
   },
   "dependencies": {
-    "@nestjs/axios": "^0.0.7",
+    "@nestjs/axios": "0.0.7",
     "@nestjs/common": "8.3.0",
     "@nestjs/config": "1.2.0",
     "@nestjs/core": "8.3.0",
     "@nestjs/platform-express": "8.3.0",
     "@nestjs/swagger": "5.2.0",
-    "@nestjs/terminus": "^8.0.6",
+    "@nestjs/terminus": "8.0.6",
     "@nestjs/typeorm": "8.0.3",
     "@nestjsx/crud": "5.0.0-alpha.3",
     "@nestjsx/crud-typeorm": "5.0.0-alpha.3",
