@@ -8,6 +8,8 @@ import { LicenseeEntity } from './licensee/licensee.entity';
 import { LicenseeModule } from './licensee/licensee.module';
 import { SoftwareTitleEntity } from './software/software.entity';
 import { SoftwareModule } from './software/software.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 const env = {
   host: process.env.POSTGRES_HOST,
@@ -33,6 +35,8 @@ const env = {
       entities: [SoftwareTitleEntity, LicenseeEntity, AssignedLicenseEntity],
       synchronize: env.synchronize,
     }),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
