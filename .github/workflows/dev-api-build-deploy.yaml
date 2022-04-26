@@ -23,7 +23,7 @@ jobs:
             
       - name: Login to Openshift Docker
         run : |
-          docker login ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }} -u ${{ secrets.OPENSHIFT4_SA_USERNAME }} -p ${{ secrets.OPENSHIFT4_SA_PASSWORD }}
+          docker login ${{ secrets.OPENSHIFT4_PUBLIC_IMAGE_REPOSITORY }} -u ${{ secrets.OPENSHIFT4_SA_USERNAME }} -p ${{ secrets.OPENSHIFT4_SA_PASSWORD }}
             
       - name: Build the Docker image
         run: |            
@@ -31,7 +31,7 @@ jobs:
           
       - name: Docker Tag Version
         run: |  
-          docker tag citz-imb-slam-api_slam-api ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}:latest
+          docker tag citz-imb-slam-api_slam-api ${{ secrets.OPENSHIFT4_PUBLIC_IMAGE_REPOSITORY }}:latest
           
       - name: Docker List Images
         run: |  
@@ -39,7 +39,7 @@ jobs:
           
       - name: Docker Push Version
         run: |  
-          docker push ${{ secrets.OPENSHIFT4_EXTERNAL_REPOSITORY }}/ca94a8-tools/citz-imb-slam-api:latest
+          docker push ${{ secrets.OPENSHIFT4_PUBLIC_IMAGE_REPOSITORY }}:latest
       
       - name: Deploy to DEV
         env:
