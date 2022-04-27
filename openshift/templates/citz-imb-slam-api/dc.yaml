@@ -34,15 +34,6 @@ objects:
       resources: {}
       activeDeadlineSeconds: 21600
     triggers:
-      - type: ImageChange
-        imageChangeParams:
-          automatic: true
-          containerNames:
-            - ${APPLICATION_NAME}
-          from:
-            kind: ImageStreamTag
-            namespace: ${LICENSE_PLATE}-tools
-            name: 'citz-imb-slam-api:latest'
       - type: ConfigChange
     replicas: 1
     revisionHistoryLimit: 10
@@ -61,7 +52,7 @@ objects:
         containers:
           - name: ${APPLICATION_NAME}
             image: >-
-              image-registry.openshift-image-registry.svc:5000/ca94a8-dev/citz-imb-slam-api-dc@sha256:89b1b50733c6e9c5b97874fcf4e8c7c2669ac3e6092dd2bcdc39ab618724bd37
+              image-registry.openshift-image-registry.svc:5000/ca94a8-tools/citz-imb-slam-api:latest
             envFrom:
               - secretRef:
                   name: slam-db-user-creds
