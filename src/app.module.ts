@@ -10,6 +10,7 @@ import { SoftwareTitleEntity } from './software/software.entity';
 import { SoftwareModule } from './software/software.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { AppController } from './app.controller';
 
 const env = {
   host: process.env.POSTGRES_HOST,
@@ -38,7 +39,7 @@ const env = {
     AuthModule,
     UsersModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
