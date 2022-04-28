@@ -34,17 +34,17 @@ objects:
       resources: {}
       activeDeadlineSeconds: 21600
     triggers:
-      - type: ImageChange
-      imageChangeParams:
-        containerNames:
-          - citz-imb-slam-api
-        from:
-          kind: ImageStreamTag
-          namespace: ca94a8-tools
-          name: 'citz-imb-slam-api:latest'
-        lastTriggeredImage: >-
-          image-registry.openshift-image-registry.svc:5000/ca94a8-tools/citz-imb-slam-api@sha256:881b8040005e0aa9d1cf813986f489dce01d1f2a600ed2911aea3d9fccfbc1c5
       - type: ConfigChange
+      - type: ImageChange
+        imageChangeParams:
+          containerNames:
+            - citz-imb-slam-api
+          from:
+            kind: ImageStreamTag
+            namespace: ca94a8-tools
+            name: 'citz-imb-slam-api:latest'
+          lastTriggeredImage: >-
+            image-registry.openshift-image-registry.svc:5000/ca94a8-tools/citz-imb-slam-api@sha256:881b8040005e0aa9d1cf813986f489dce01d1f2a600ed2911aea3d9fccfbc1c5
     replicas: 1
     revisionHistoryLimit: 10
     test: false
