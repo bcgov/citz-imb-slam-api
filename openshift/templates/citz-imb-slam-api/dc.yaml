@@ -37,6 +37,7 @@ objects:
       - type: ConfigChange
       - type: ImageChange
         imageChangeParams:
+          automatic: true
           containerNames:
             - citz-imb-slam-api
           from:
