@@ -8,8 +8,8 @@ import { LicenseeEntity } from './licensee/licensee.entity';
 import { LicenseeModule } from './licensee/licensee.module';
 import { SoftwareTitleEntity } from './software/software.entity';
 import { SoftwareModule } from './software/software.module';
-import { HealthModule } from './health/health.module'
-import { HttpModule } from '@nestjs/axios'
+import { HealthModule } from './health/health.module';
+import { HttpModule } from '@nestjs/axios';
 
 const env = {
   host: process.env.POSTGRES_HOST,
