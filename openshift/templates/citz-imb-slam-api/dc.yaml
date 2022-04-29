@@ -43,7 +43,7 @@ objects:
           from:
             kind: ImageStreamTag
             namespace: ca94a8-tools
-            name: 'citz-imb-slam-api:latest'
+            name: 'citz-imb-slam-api:${IMAGE_TAG}'
           lastTriggeredImage: >-
             image-registry.openshift-image-registry.svc:5000/ca94a8-tools/citz-imb-slam-api@sha256:881b8040005e0aa9d1cf813986f489dce01d1f2a600ed2911aea3d9fccfbc1c5
     replicas: 1
@@ -63,7 +63,7 @@ objects:
         containers:
           - name: ${APPLICATION_NAME}
             image: >-
-              image-registry.openshift-image-registry.svc:5000/ca94a8-tools/citz-imb-slam-api:latest
+              image-registry.openshift-image-registry.svc:5000/ca94a8-tools/citz-imb-slam-api:${IMAGE_TAG}
             envFrom:
               - secretRef:
                   name: slam-db-user-creds
@@ -102,3 +102,8 @@ parameters:
   name: ENVIRONMENT
   required: true
   value: dev
+- description: Image Tag
+  displayName: ImageTag
+  name: IMAGE_TAG
+  required: true
+  value: latest
