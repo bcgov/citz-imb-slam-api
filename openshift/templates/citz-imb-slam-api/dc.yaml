@@ -91,7 +91,7 @@ parameters:
   displayName: AppName
   name: APPLICATION_NAME
   required: true
-  value: citz-imb-slam-api-dc
+  value: citz-imb-slam-api
 - description: License Plate
   displayName: License Plate
   name: LICENSE_PLATE
