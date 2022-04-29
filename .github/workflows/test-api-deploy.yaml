@@ -15,7 +15,7 @@ jobs:
         uses: redhat-developer/openshift-actions@v1.1
         with:
           openshift_server_url: ${{ secrets.OPENSHIFT4_SERVER_URL }}
-          parameters: '{"apitoken": "${{ secrets.OPENSHIFT4_SA_PASSWORD }}"}'
+          parameters: '{"apitoken": "${{ secrets.OPENSHIFT4_TEST_SA_PASSWORD }}"}'
           cmd: |
             'version'
             
