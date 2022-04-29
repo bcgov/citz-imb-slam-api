@@ -7,34 +7,34 @@ import { CrudConfigService } from '@nestjsx/crud';
 //! Important: load config before (!!!) you import AppModule
 // https://github.com/nestjsx/crud/wiki/Controllers#global-options
 CrudConfigService.load({
-  routes: {
-    only: [
-      'getManyBase',
-      'getOneBase',
-      'createOneBase',
-      'replaceOneBase',
-      'deleteOneBase',
-    ],
-  },
+    routes: {
+        only: [
+            'getManyBase',
+            'getOneBase',
+            'createOneBase',
+            'replaceOneBase',
+            'deleteOneBase',
+        ],
+    },
 });
 
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule);
 
-  app.enableCors();
-  app.setGlobalPrefix('api');
+    app.enableCors();
+    app.setGlobalPrefix('api');
 
-  const config = new DocumentBuilder()
-    .setTitle('SLAM-API')
-    .setVersion('1.0')
-    .build();
+    const config = new DocumentBuilder()
+        .setTitle('SLAM-API')
+        .setVersion('1.0')
+        .build();
 
-  const document = SwaggerModule.createDocument(app, config);
+    const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('api', app, document);
+    SwaggerModule.setup('api', app, document);
 
-  await app.listen(3001);
+    await app.listen(3001);
 }
 bootstrap();

@@ -9,7 +9,7 @@ import { LicenseeEntity } from './licensee.entity';
 
 @Injectable()
 export class LicenseeService extends TypeOrmCrudService<LicenseeEntity> {
-  constructor(@InjectRepository(LicenseeEntity) repo) {
-    super(repo);
-  }
+    constructor(@InjectRepository(LicenseeEntity) repo) {
+        super(repo);
+    }
 }

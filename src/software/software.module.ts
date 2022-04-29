@@ -5,8 +5,8 @@ import { SoftwareTitleEntity } from './software.entity';
 import { SoftwareService } from './software.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([SoftwareTitleEntity])],
-  controllers: [SoftwareController],
-  providers: [SoftwareService],
+    imports: [TypeOrmModule.forFeature([SoftwareTitleEntity])],
+    controllers: [SoftwareController],
+    providers: [SoftwareService],
 })
 export class SoftwareModule {}
