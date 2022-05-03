@@ -32,5 +32,8 @@ RUN npm install
 COPY . .
 
 COPY --from=build /app/dist ./dist
+COPY --from=build /app/migrations ./migrations
+
+RUN npm run migration:run
 
 CMD ["node", "dist/main.js"]
