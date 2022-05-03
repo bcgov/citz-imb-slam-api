@@ -80,6 +80,11 @@ objects:
             terminationMessagePath: /dev/termination-log
             terminationMessagePolicy: File
             imagePullPolicy: Always
+            command: 
+            - /bin/sh
+            - -c
+            - | 
+              npm run migrations:run
         restartPolicy: Always
         terminationGracePeriodSeconds: 30
         dnsPolicy: ClusterFirst
