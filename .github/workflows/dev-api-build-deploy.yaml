@@ -5,6 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: citz-imb-slam-api-CICD
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,28 +23,28 @@ jobs:
           parameters: '{"apitoken": "${{ secrets.OPENSHIFT4_SA_PASSWORD }}"}'
           cmd: |
             'version'
-            
+
       - name: Login to Openshift Docker
         run : |
           docker login ${{ secrets.OPENSHIFT4_PUBLIC_IMAGE_REPOSITORY_BASE_URL }} -u ${{ secrets.OPENSHIFT4_SA_USERNAME }} -p ${{ secrets.OPENSHIFT4_SA_PASSWORD }}
-            
+
       - name: Build the Docker image
-        run: |            
+        run: |
           docker-compose build slam-api
-          
+
       - name: Docker Tag Version
-        run: |  
+        run: |
           docker tag citz-imb-slam-api_slam-api ${{ secrets.OPENSHIFT4_API_PUBLIC_IMAGE_REPOSITORY }}:latest
-          
+
       - name: Docker List Images
-        run: |  
+        run: |
           docker image ls
-          
+
       - name: Docker Push Version
-        run: |  
+        run: |
           docker push ${{ secrets.OPENSHIFT4_API_PUBLIC_IMAGE_REPOSITORY }}:latest
-          
-          
+
+
       - name: Cluster Login
         uses: redhat-developer/openshift-actions@v1.1
         with:
@@ -48,7 +52,7 @@ jobs:
           parameters: '{"apitoken": "${{ secrets.OPENSHIFT4_DEV_SA_PASSWORD }}"}'
           cmd: |
             'version'
-      
+
       - name: Deploy to DEV
         env:
           NAMESPACE: "${{ secrets.OPENSHIFT_DEV_NAMESPACE }}"
@@ -56,14 +60,14 @@ jobs:
           LICENSE_PLATE: "${{ secrets.LICENSE_PLATE }}"
           ENVIRONMENT: "${{ secrets.ENVIRONMENT }}"
           IMAGE_TAG: latest
-        run: |  
+        run: |
           ./.github/helpers/deploy-api.sh ${{ env.LATEST_VERSION }}
-          
+
       - name: Health Check DEV deployment
         env:
           NAMESPACE: "${{ secrets.OPENSHIFT_DEV_NAMESPACE }}"
           APPLICATION_NAME: "${{ secrets.APPLICATION_NAME }}"
           LICENSE_PLATE: "${{ secrets.LICENSE_PLATE }}"
           ENVIRONMENT: "${{ secrets.ENVIRONMENT }}"
-        run: |  
+        run: |
           ./.github/helpers/application_health.sh
