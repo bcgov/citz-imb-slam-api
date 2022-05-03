@@ -84,7 +84,7 @@ objects:
             - /bin/sh
             - -c
             - | 
-              npm run migrations:run
+              npm run migration:run
         restartPolicy: Always
         terminationGracePeriodSeconds: 30
         dnsPolicy: ClusterFirst
