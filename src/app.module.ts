@@ -8,9 +8,6 @@ import { typeOrmAsyncConfig } from './config/typeorm.config';
 import { HealthModule } from './health/health.module';
 import { LicenseeModule } from './licensee/licensee.module';
 import { SoftwareModule } from './software/software.module';
-import { HealthModule } from './health/health.module';
-import { HttpModule } from '@nestjs/axios';
-
 
 const env = {
     host: process.env.POSTGRES_HOST,
