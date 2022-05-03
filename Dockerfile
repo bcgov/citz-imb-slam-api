@@ -34,4 +34,4 @@ COPY . .
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/src/migrations ./src/migrations
 
-CMD ["npm", "start:prod"]
+CMD ["npm", "run", "start:prod"]
