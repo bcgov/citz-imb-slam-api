@@ -69,9 +69,9 @@ objects:
                   name: slam-db-user-creds
             env:
               - name: POSTGRES_DATABASE
-                value: postgres
+                value: slam-db
               - name: POSTGRES_HOST
-                value: slam-db-service
+                value: postgresql
               - name: POSTGRES_SYNCHRONIZE
                 value: 'true'
               - name: POSTGRES_PORT
