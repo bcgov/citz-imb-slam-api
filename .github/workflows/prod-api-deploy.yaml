@@ -30,7 +30,7 @@ jobs:
           LICENSE_PLATE: "${{ secrets.LICENSE_PLATE }}"
           ENVIRONMENT: "${{ secrets.PROD_ENVIRONMENT }}"
         run: |  
-          ./.github/helpers/deploy_app.sh
+          ./.github/helpers/deploy_api.sh
           
       - name: Health Check PROD deployment
         env:
