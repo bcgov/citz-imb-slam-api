@@ -10,9 +10,9 @@ objects:
   apiVersion: v1
   metadata:
     name: ${APPLICATION_NAME}
-    namespace: ca94a8-prod
+    namespace: ${LICENSE_PLATE}-${ENVIRONMENT}
     labels:
-      app: citz-imb-slam-api
+      app:  ${APPLICATION_NAME}
       app.kubernetes.io/component: ${APPLICATION_NAME}
       app.kubernetes.io/instance: ${APPLICATION_NAME}
       app.kubernetes.io/name: ${APPLICATION_NAME}
@@ -27,8 +27,8 @@ objects:
     ports:
       - name: 3000-tcp
         protocol: TCP
-        port: 3000
-        targetPort: 3001
+        port: ${PORT}
+        targetPort: ${TARGET_PORT}
     selector:
       app: ${APPLICATION_NAME}
       deploymentconfig: ${APPLICATION_NAME}
@@ -45,3 +45,23 @@ parameters:
   name: APPLICATION_NAME
   required: true
   value: citz-imb-slam-api
+- description: License Plate
+  displayName: License Plate
+  name: LICENSE_PLATE
+  required: true
+  value: ca94a8
+- description: Environment
+  displayName: Environment
+  name: ENVIRONMENT
+  required: true
+  value: prod
+- description: Port
+  displayName: Port
+  name: PORT
+  required: true
+  value: prod
+- description: TargetPort
+  displayName: TargetPort
+  name: TARGET_PORT
+  required: true
+  value: prod
