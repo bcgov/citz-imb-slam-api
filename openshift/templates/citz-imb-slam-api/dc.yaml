@@ -72,8 +72,6 @@ objects:
                 value: slam-db
               - name: POSTGRES_HOST
                 value: postgresql
-              - name: POSTGRES_SYNCHRONIZE
-                value: 'true'
               - name: POSTGRES_PORT
                 value: '5432'
             resources: {}
