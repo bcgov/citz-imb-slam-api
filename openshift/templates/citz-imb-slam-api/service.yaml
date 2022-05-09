@@ -59,9 +59,9 @@ parameters:
   displayName: Port
   name: PORT
   required: true
-  value: prod
+  value: 3000
 - description: TargetPort
   displayName: TargetPort
   name: TARGET_PORT
   required: true
-  value: prod
+  value: 3001
