@@ -4,29 +4,29 @@ import { SoftwareTitleEntity } from './software.entity';
 import { SoftwareService } from './software.service';
 
 @Crud({
-  params: {
-    id: {
-      field: 'id',
-      type: 'uuid',
-      primary: true,
+    params: {
+        id: {
+            field: 'id',
+            type: 'uuid',
+            primary: true,
+        },
     },
-  },
-  model: {
-    type: SoftwareTitleEntity,
-  },
-  query: {
-    join: {
-      licenseeConnection: {
-        eager: true,
-        alias: 'assignedLicenses',
-      },
-      'licenseeConnection.licensee': {
-        eager: true,
-      },
+    model: {
+        type: SoftwareTitleEntity,
     },
-  },
+    query: {
+        join: {
+            licenseeConnection: {
+                eager: true,
+                alias: 'assignedLicenses',
+            },
+            'licenseeConnection.licensee': {
+                eager: true,
+            },
+        },
+    },
 })
 @Controller('software')
 export class SoftwareController implements CrudController<SoftwareTitleEntity> {
-  constructor(public service: SoftwareService) {}
+    constructor(public service: SoftwareService) {}
 }

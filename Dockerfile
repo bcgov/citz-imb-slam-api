@@ -32,5 +32,6 @@ RUN npm install
 COPY . .
 
 COPY --from=build /app/dist ./dist
+COPY --from=build /app/src/migrations ./src/migrations
 
-CMD ["node", "dist/main.js"]
+CMD ["npm", "run", "start:prod"]

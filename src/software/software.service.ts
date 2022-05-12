@@ -5,7 +5,7 @@ import { SoftwareTitleEntity } from './software.entity';
 
 @Injectable()
 export class SoftwareService extends TypeOrmCrudService<SoftwareTitleEntity> {
-  constructor(@InjectRepository(SoftwareTitleEntity) repo) {
-    super(repo);
-  }
+    constructor(@InjectRepository(SoftwareTitleEntity) repo) {
+        super(repo);
+    }
 }

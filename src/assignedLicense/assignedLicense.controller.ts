@@ -8,18 +8,18 @@ import { AssignedLicenseEntity } from './assignedLicense.entity';
 import { AssignedLicenseService } from './assignedLicense.service';
 
 @Crud({
-  params: {
-    id: {
-      field: 'id',
-      type: 'uuid',
-      primary: true,
+    params: {
+        id: {
+            field: 'id',
+            type: 'uuid',
+            primary: true,
+        },
     },
-  },
-  model: { type: AssignedLicenseEntity },
+    model: { type: AssignedLicenseEntity },
 })
 @Controller('assigned-license')
 export class AssignedLicenseController
-  implements CrudController<AssignedLicenseEntity>
+    implements CrudController<AssignedLicenseEntity>
 {
-  constructor(public service: AssignedLicenseService) {}
+    constructor(public service: AssignedLicenseService) {}
 }

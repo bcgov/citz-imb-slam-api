@@ -34,16 +34,18 @@ objects:
       resources: {}
       activeDeadlineSeconds: 21600
     triggers:
+      - type: ConfigChange
       - type: ImageChange
         imageChangeParams:
           automatic: true
           containerNames:
-            - ${APPLICATION_NAME}
+            - citz-imb-slam-api
           from:
             kind: ImageStreamTag
-            namespace: ${LICENSE_PLATE}-${ENVIRONMENT}
-            name: 'slam-api:latest'
-      - type: ConfigChange
+            namespace: ca94a8-tools
+            name: 'citz-imb-slam-api:${IMAGE_TAG}'
+          lastTriggeredImage: >-
+            image-registry.openshift-image-registry.svc:5000/ca94a8-tools/citz-imb-slam-api@sha256:881b8040005e0aa9d1cf813986f489dce01d1f2a600ed2911aea3d9fccfbc1c5
     replicas: 1
     revisionHistoryLimit: 10
     test: false
@@ -61,17 +63,15 @@ objects:
         containers:
           - name: ${APPLICATION_NAME}
             image: >-
-              image-registry.openshift-image-registry.svc:5000/ca94a8-dev/citz-imb-slam-api-dc@sha256:89b1b50733c6e9c5b97874fcf4e8c7c2669ac3e6092dd2bcdc39ab618724bd37
+              image-registry.openshift-image-registry.svc:5000/ca94a8-tools/citz-imb-slam-api:${IMAGE_TAG}
             envFrom:
               - secretRef:
                   name: slam-db-user-creds
             env:
               - name: POSTGRES_DATABASE
-                value: postgres
+                value: slam-db
               - name: POSTGRES_HOST
-                value: slam-db-service
-              - name: POSTGRES_SYNCHRONIZE
-                value: 'true'
+                value: postgresql
               - name: POSTGRES_PORT
                 value: '5432'
             resources: {}
@@ -89,7 +89,7 @@ parameters:
   displayName: AppName
   name: APPLICATION_NAME
   required: true
-  value: citz-imb-slam-api-dc
+  value: citz-imb-slam-api
 - description: License Plate
   displayName: License Plate
   name: LICENSE_PLATE
@@ -100,3 +100,8 @@ parameters:
   name: ENVIRONMENT
   required: true
   value: dev
+- description: Image Tag
+  displayName: ImageTag
+  name: IMAGE_TAG
+  required: true
+  value: latest
