@@ -29,8 +29,10 @@ const env = {
         TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
         HealthModule,
         HttpModule,
+        AuthModule,
+        UsersModule,
     ],
-    controllers: [],
+    controllers: [AppController],
     providers: [],
 })
 export class AppModule {}
