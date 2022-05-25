@@ -1,6 +1,3 @@
-/*
-https://docs.nestjs.com/controllers#controllers
-*/
 import { Controller } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { LicenseeEntity } from './licensee.entity';
