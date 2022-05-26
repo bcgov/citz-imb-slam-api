@@ -2,8 +2,9 @@
 https://docs.nestjs.com/controllers#controllers
 */
 
-import { Controller } from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { AssignedLicenseEntity } from './assignedLicense.entity';
 import { AssignedLicenseService } from './assignedLicense.service';
 
@@ -17,6 +18,7 @@ import { AssignedLicenseService } from './assignedLicense.service';
     },
     model: { type: AssignedLicenseEntity },
 })
+@UseGuards(JwtAuthGuard)
 @Controller('assigned-license')
 export class AssignedLicenseController
     implements CrudController<AssignedLicenseEntity>
