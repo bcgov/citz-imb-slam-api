@@ -8,6 +8,9 @@ import { typeOrmAsyncConfig } from './config/typeorm.config';
 import { HealthModule } from './health/health.module';
 import { LicenseeModule } from './licensee/licensee.module';
 import { SoftwareModule } from './software/software.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { AppController } from './app.controller';
 
 const env = {
     host: process.env.POSTGRES_HOST,
@@ -26,8 +29,10 @@ const env = {
         TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
         HealthModule,
         HttpModule,
+        AuthModule,
+        UsersModule,
     ],
-    controllers: [],
+    controllers: [AppController],
     providers: [],
 })
 export class AppModule {}
