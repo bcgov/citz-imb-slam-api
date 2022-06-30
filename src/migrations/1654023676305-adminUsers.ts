@@ -20,6 +20,9 @@ export class adminUsers1654023676305 implements MigrationInterface {
         await queryRunner.query(
             "INSERT INTO users (username, role) VALUES ('John-Dion', 'Admin');",
         );
+        await queryRunner.query(
+            "INSERT INTO users (username, role) VALUES ('mattsiel', 'Admin');",
+        );
     }
     //SELECT * FROM users;
     public async down(queryRunner: QueryRunner): Promise<void> {
@@ -38,6 +41,9 @@ export class adminUsers1654023676305 implements MigrationInterface {
         );
         await queryRunner.query(
             "DELETE FROM users WHERE username = 'John-Dion';",
+        );
+        await queryRunner.query(
+            "DELETE FROM users WHERE username = 'mattsiel';",
         );
     }
 }
