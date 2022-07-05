@@ -1,9 +1,9 @@
 name: DEV Build and Deploy SLAM API
 
 on:
-  push:
-    branches: [main]
+  pull_request:
   workflow_dispatch:
+    branches: [main]
 
 concurrency:
   group: citz-imb-slam-api-CICD
