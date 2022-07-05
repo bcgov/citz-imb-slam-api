@@ -1,8 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
 import { CrudConfigService } from '@nestjsx/crud';
+import helmet from 'helmet';
 
 //! Important: load config before (!!!) you import AppModule
 // https://github.com/nestjsx/crud/wiki/Controllers#global-options
@@ -23,7 +22,8 @@ import { AppModule } from './app.module';
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
-    app.enableCors({ origin: '*' });
+    // app.enableCors({ origin: '*' });
+    app.use(helmet());
     app.setGlobalPrefix('api/v1');
 
     const config = new DocumentBuilder()
