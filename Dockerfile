@@ -12,7 +12,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+# RUN npm run build
 
 ###############################################################################
 ###                             Build                                       ###
@@ -31,7 +31,7 @@ RUN npm install
 
 COPY . .
 
-COPY --from=build /app/dist ./dist
-COPY --from=build /app/src/migrations ./src/migrations
+# COPY --from=build /app/dist ./dist
+# COPY --from=build /app/src/migrations ./src/migrations
 
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "start"]

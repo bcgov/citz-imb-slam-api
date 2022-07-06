@@ -1,5 +1,5 @@
 const app = require('express')()
-const PORT = 8080
+const PORT = 3001
 
 app.get('/', (req, res) => res.send('ok'))
 
