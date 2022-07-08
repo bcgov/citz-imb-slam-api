@@ -8,7 +8,7 @@ const app = express()
 
 const PORT = 3001
 
-app.use(cors({ origin: '*' }))
+app.use(cors({ origin: true, credentials: true }))
 app.use(express.json())
 app.use(cookieParser())
 app.use(session({
