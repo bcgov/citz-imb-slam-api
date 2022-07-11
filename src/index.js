@@ -2,6 +2,9 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const session = require('express-session')
+const passport = require('passport')
+require('./strategies/local')
+
 const authRoute = require('./routes/auth')
 
 const app = express()
@@ -17,12 +20,20 @@ app.use(session({
   saveUninitialized: false
 }))
 
+app.use((req, res, next) => {
+  console.log(`${req.method}:${req.url}`)
+  next()
+})
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use('/api/v1/auth', authRoute)
 
 app.use((req, res, next) => {
-  if (req.session.user) next()
-
-  res.send(401)
+  console.log('req.user:', req.user)
+  if (req.user) next()
+  else res.send(401)
 })
 
 app.get('/api/v1', (req, res) => {
