@@ -3,15 +3,16 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const session = require('express-session')
 const passport = require('passport')
-require('./strategies/local')
+require('./strategies/github')
 
+console.log('index.js')
 const authRoute = require('./routes/auth')
 
 const app = express()
 
 const PORT = 3001
 
-app.use(cors({ origin: true, credentials: true }))
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 app.use(express.json())
 app.use(cookieParser())
 app.use(session({

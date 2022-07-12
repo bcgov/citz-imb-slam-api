@@ -20,9 +20,10 @@ const router = Router()
 //   } else response.send(401)
 // })
 
-router.post('/login', passport.authenticate('local'), (req, res) => {
-  console.log('Logged In')
-  res.send(201)
+router.get('/github', passport.authenticate('github'))
+
+router.get('/github/callback', passport.authenticate('github'), (req, res) => {
+  console.log('callback')
 })
 
 module.exports = router
