@@ -22,7 +22,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     "prettier/prettier": "error",
     "no-unused-vars": "warn",
-    "no-console": "warn",
+    "no-console": ["warn", { allow: ['warn', 'error', 'info'] }],
     "import/prefer-default-export": "off",
     "no-plusplus": "off",
     "no-underscore-dangle": "off"

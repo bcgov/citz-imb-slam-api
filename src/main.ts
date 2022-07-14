@@ -22,6 +22,11 @@ CrudConfigService.load({
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
+    app.use((req, res, next) => {
+        console.info(`${req.method}:${req.url}`);
+        next();
+    });
+
     app.enableCors({ origin: '*' });
     app.setGlobalPrefix('api/v1');
 
