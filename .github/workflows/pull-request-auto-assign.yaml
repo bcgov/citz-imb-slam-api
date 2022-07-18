@@ -1,11 +1,12 @@
 name: Pull Request - Auto Assign Development Team
-
 on:
-  pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
+  workflow_dispatch:
+# on:
+#   pull_request:
+#     types:
+#       - opened
+#       - reopened
+#       - synchronize
 jobs:
   assign-team-members:
     runs-on: ubuntu-latest
