@@ -12,11 +12,17 @@ export class SoftwareTitleEntity extends GenericEntity {
     title: string;
 
     @ApiProperty()
-    @Column()
+    @Column({
+        default: '',
+        nullable: true,
+    })
     publisher: string;
 
     @ApiProperty()
-    @Column()
+    @Column({
+        default: '',
+        nullable: true,
+    })
     administrator: string;
 
     @ApiProperty()
