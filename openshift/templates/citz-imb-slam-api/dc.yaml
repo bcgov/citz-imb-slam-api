@@ -68,7 +68,7 @@ objects:
               - secretRef:
                   name: slam-db-user-creds
               - secretRef:
-                name: api-jwt
+                  name: api-jwt
             env:
               - name: POSTGRES_DATABASE
                 value: slam-db
