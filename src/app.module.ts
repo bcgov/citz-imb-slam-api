@@ -8,9 +8,6 @@ import { typeOrmAsyncConfig } from './config/typeorm.config';
 import { HealthModule } from './health/health.module';
 import { LicenseeModule } from './licensee/licensee.module';
 import { SoftwareModule } from './software/software.module';
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
-import { AppController } from './app.controller';
 
 @Module({
     imports: [
@@ -21,10 +18,8 @@ import { AppController } from './app.controller';
         TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
         HealthModule,
         HttpModule,
-        AuthModule,
-        UsersModule,
     ],
-    controllers: [AppController],
+    controllers: [],
     providers: [],
 })
 export class AppModule {}
