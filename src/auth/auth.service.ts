@@ -9,19 +9,35 @@ export class AuthService {
         private jwtService: JwtService,
     ) {}
 
-    async authorizeUser(username: string): Promise<any> {
-        const authorizedUser = await this.usersService.findOne({ username });
+    async authorizeUser(email: string): Promise<any> {
+        const authorizedUser = await this.usersService.findOne({ email });
         if (authorizedUser) return authorizedUser;
 
         return null;
     }
 
-    async login(username: string) {
-        const {
-            username: name,
-            id: sub,
-            role,
-        } = await this.authorizeUser(username);
+    async login(user: any) {
+        let authorizedUser = await this.authorizeUser(user.email);
+        console.log('user', authorizedUser);
+        if (!authorizedUser) {
+            // TODO: Add user to users table
+
+            // await this.usersService.createOne(
+            //     {
+            //         parsed: null,
+            //         options: null,
+            //     },
+            //     {
+            //         username: user.username,
+            //         email: user.email,
+            //         role: 'Admin',
+            //     },
+            // );
+            authorizedUser = await this.authorizeUser(user.email);
+            console.log('addedUser', authorizedUser);
+        }
+
+        const { username: name, id: sub, role } = authorizedUser;
 
         const payload = { name, sub, role };
 
