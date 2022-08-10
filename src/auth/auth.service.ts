@@ -12,20 +12,12 @@ export class AuthService {
     ) {}
 
     async authorizeUser(user: any): Promise<any> {
-        let authorizedUser = await this.usersService.findOne({
+        const authorizedUser = await this.usersService.findOne({
             email: user.email,
         });
-        if (!authorizedUser) {
-            // setTimeout(() => {}, 2000);
-            authorizedUser = await this.usersService.findOne({
-                email: user.email,
-            });
-        }
+
         if (authorizedUser) return authorizedUser;
-        else {
-            await this.createUser(user);
-            return await this.usersService.findOne({ email: user.email });
-        }
+        else return null;
     }
 
     async createUser(user: any) {
@@ -44,6 +36,10 @@ export class AuthService {
     async login(user: any) {
         let authorizedUser = await this.authorizeUser(user);
         console.log('user', authorizedUser);
+        if (!authorizedUser) {
+            await this.createUser(user);
+            authorizedUser = await this.authorizeUser(user);
+        }
 
         const { username: name, id: sub, role } = authorizedUser;
 
