@@ -41,7 +41,7 @@ export class adminUsers1654023676305 implements MigrationInterface {
         //     "INSERT INTO users (username, email, role) VALUES ('John Dion', 'Admin');",
         // );
         // await queryRunner.query(
-        //     "INSERT INTO users (username, email, role) VALUES ('Dylan Barkowsky', 'dylan.barkowsky@gov.bc.ca', 'Admin');",
+        //     "INSERT INTO users (username, email, role) VALUES ('Dylan Barkowsky', 'Admin');",
         // );
         // await queryRunner.query(
         //     "INSERT INTO users (username, email, role) VALUES ('Matthew Sielecki', 'Admin');",
