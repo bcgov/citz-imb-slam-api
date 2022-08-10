@@ -34,11 +34,14 @@ export class AuthService {
 
     async login(user: any) {
         let authorizedUser = await this.authorizeUser(user);
-        console.log('user', authorizedUser);
+
         if (!authorizedUser) {
-            await this.createUser(user);
-            authorizedUser = await this.authorizeUser(user);
-            console.log('newUser', authorizedUser);
+            try {
+                await this.createUser(user);
+                authorizedUser = await this.authorizeUser(user);
+            } catch (e) {
+                authorizedUser = await this.authorizeUser(user);
+            }
         }
 
         const { username: name, id: sub, role } = authorizedUser;
