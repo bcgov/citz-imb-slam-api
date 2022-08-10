@@ -24,28 +24,28 @@ export class adminUsers1654023676305 implements MigrationInterface {
 
         // keycloak authorization
         await queryRunner.query(
-            "INSERT INTO users (username, role) VALUES ('Scott Toews', 'Admin');",
+            "INSERT INTO users (username, email, role) VALUES ('Scott Toews', 'Admin');",
         );
         await queryRunner.query(
-            "INSERT INTO users (username, role) VALUES ('Aiden In', 'Admin');",
+            "INSERT INTO users (username, email, role) VALUES ('Aiden In', 'Admin');",
         );
         await queryRunner.query(
-            "INSERT INTO users (username, role) VALUES ('Adam Kroon', 'Admin');",
+            "INSERT INTO users (username, email, role) VALUES ('Adam Kroon', 'Admin');",
         );
         await queryRunner.query(
-            "INSERT INTO users (username, role) VALUES ('Laura Benson', 'Admin');",
+            "INSERT INTO users (username, email, role) VALUES ('Laura Benson', 'Admin');",
         );
         await queryRunner.query(
-            "INSERT INTO users (username, role) VALUES ('Will Lloyd', 'Admin');",
+            "INSERT INTO users (username, email, role) VALUES ('Will Lloyd', 'Admin');",
         );
         await queryRunner.query(
-            "INSERT INTO users (username, role) VALUES ('John Dion', 'Admin');",
+            "INSERT INTO users (username, email, role) VALUES ('John Dion', 'Admin');",
         );
         await queryRunner.query(
-            "INSERT INTO users (username, role) VALUES ('Dylan Barkowsky', 'Admin');",
+            "INSERT INTO users (username, email, role) VALUES ('Dylan Barkowsky', 'dylan.barkowsky@gov.bc.ca', 'Admin');",
         );
         await queryRunner.query(
-            "INSERT INTO users (username, role) VALUES ('Matthew Sielecki', 'Admin');",
+            "INSERT INTO users (username, email, role) VALUES ('Matthew Sielecki', 'Admin');",
         );
     }
     //SELECT * FROM users;

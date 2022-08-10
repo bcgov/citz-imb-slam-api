@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
+import { AppModule } from '../app.module';
+import { getConnection } from 'typeorm';
 
 @Injectable()
 export class AuthService {
@@ -9,33 +11,39 @@ export class AuthService {
         private jwtService: JwtService,
     ) {}
 
-    async authorizeUser(email: string): Promise<any> {
-        const authorizedUser = await this.usersService.findOne({ email });
+    async authorizeUser(user: any): Promise<any> {
+        let authorizedUser = await this.usersService.findOne({
+            email: user.email,
+        });
+        if (!authorizedUser) {
+            // setTimeout(() => {}, 2000);
+            authorizedUser = await this.usersService.findOne({
+                email: user.email,
+            });
+        }
         if (authorizedUser) return authorizedUser;
+        else {
+            await this.createUser(user);
+            return await this.usersService.findOne({ email: user.email });
+        }
+    }
 
-        return null;
+    async createUser(user: any) {
+        await getConnection()
+            .createQueryBuilder()
+            .insert()
+            .into('users')
+            .values({
+                username: user.username,
+                email: user.email,
+                role: 'Admin',
+            })
+            .execute();
     }
 
     async login(user: any) {
-        let authorizedUser = await this.authorizeUser(user.email);
+        let authorizedUser = await this.authorizeUser(user);
         console.log('user', authorizedUser);
-        if (!authorizedUser) {
-            // TODO: Add user to users table
-
-            // await this.usersService.createOne(
-            //     {
-            //         parsed: null,
-            //         options: null,
-            //     },
-            //     {
-            //         username: user.username,
-            //         email: user.email,
-            //         role: 'Admin',
-            //     },
-            // );
-            authorizedUser = await this.authorizeUser(user.email);
-            console.log('addedUser', authorizedUser);
-        }
 
         const { username: name, id: sub, role } = authorizedUser;
 
