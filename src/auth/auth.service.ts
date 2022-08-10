@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
-import { AppModule } from '../app.module';
 import { getConnection } from 'typeorm';
 
 @Injectable()
@@ -39,6 +38,7 @@ export class AuthService {
         if (!authorizedUser) {
             await this.createUser(user);
             authorizedUser = await this.authorizeUser(user);
+            console.log('newUser', authorizedUser);
         }
 
         const { username: name, id: sub, role } = authorizedUser;
