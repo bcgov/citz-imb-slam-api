@@ -16,11 +16,11 @@ export class LicenseeEntity extends GenericEntity {
     email: string;
 
     @ApiProperty()
-    @Column('text', { nullable: true })
+    @Column('text', { nullable: false })
     notes: string;
 
     @ApiProperty()
-    @Column('text', { nullable: true })
+    @Column('text', { nullable: false })
     role: string;
 
     @OneToMany(() => AssignedLicenseEntity, (sl) => sl.licensee, {
