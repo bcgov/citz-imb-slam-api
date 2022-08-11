@@ -7,6 +7,6 @@ export class AppController {
 
     @Post('login')
     login(@Body() body): any {
-        return this.authService.login(body.username);
+        return this.authService.login(body);
     }
 }

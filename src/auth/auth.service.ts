@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
+import { getConnection } from 'typeorm';
 
 @Injectable()
 export class AuthService {
@@ -9,19 +10,41 @@ export class AuthService {
         private jwtService: JwtService,
     ) {}
 
-    async authorizeUser(username: string): Promise<any> {
-        const authorizedUser = await this.usersService.findOne({ username });
-        if (authorizedUser) return authorizedUser;
+    async authorizeUser(user: any): Promise<any> {
+        const authorizedUser = await this.usersService.findOne({
+            email: user.email,
+        });
 
-        return null;
+        if (authorizedUser) return authorizedUser;
+        else return null;
     }
 
-    async login(username: string) {
-        const {
-            username: name,
-            id: sub,
-            role,
-        } = await this.authorizeUser(username);
+    async createUser(user: any) {
+        await getConnection()
+            .createQueryBuilder()
+            .insert()
+            .into('users')
+            .values({
+                username: user.username,
+                email: user.email,
+                role: 'Admin',
+            })
+            .execute();
+    }
+
+    async login(user: any) {
+        let authorizedUser = await this.authorizeUser(user);
+
+        if (!authorizedUser) {
+            try {
+                await this.createUser(user);
+                authorizedUser = await this.authorizeUser(user);
+            } catch (e) {
+                authorizedUser = await this.authorizeUser(user);
+            }
+        }
+
+        const { username: name, id: sub, role } = authorizedUser;
 
         const payload = { name, sub, role };
 
