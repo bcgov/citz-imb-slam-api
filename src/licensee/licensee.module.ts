@@ -8,5 +8,6 @@ import { LicenseeService } from './licensee.service';
     imports: [TypeOrmModule.forFeature([LicenseeEntity])],
     controllers: [LicenseeController],
     providers: [LicenseeService],
+    exports: [LicenseeService],
 })
 export class LicenseeModule {}

@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from '../users/users.service';
 import { getConnection } from 'typeorm';
+import { LicenseeService } from 'src/licensee/licensee.service';
 
 @Injectable()
 export class AuthService {
     constructor(
-        private usersService: UsersService,
+        private licenseeService: LicenseeService,
         private jwtService: JwtService,
     ) {}
 
     async authorizeUser(user: any): Promise<any> {
-        const authorizedUser = await this.usersService.findOne({
+        const authorizedUser = await this.licenseeService.findOne({
             email: user.email,
         });
 
@@ -23,9 +23,9 @@ export class AuthService {
         await getConnection()
             .createQueryBuilder()
             .insert()
-            .into('users')
+            .into('licensees')
             .values({
-                username: user.username,
+                name: user.username,
                 email: user.email,
                 role: 'Admin',
             })

@@ -6,6 +6,10 @@ import { Column, Entity, OneToMany } from 'typeorm';
 @Entity('licensees')
 export class LicenseeEntity extends GenericEntity {
     @ApiProperty()
+    @Column('text', { nullable: false })
+    name: string;
+
+    @ApiProperty()
     @Column({
         unique: true,
     })
@@ -14,6 +18,10 @@ export class LicenseeEntity extends GenericEntity {
     @ApiProperty()
     @Column('text', { nullable: true })
     notes: string;
+
+    @ApiProperty()
+    @Column('text', { nullable: true })
+    role: string;
 
     @OneToMany(() => AssignedLicenseEntity, (sl) => sl.licensee, {
         cascade: true,
