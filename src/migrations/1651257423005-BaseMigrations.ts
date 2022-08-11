@@ -5,7 +5,7 @@ export class BaseMigrations1651257423005 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(
-            `CREATE TABLE "licensees" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created" TIMESTAMP NOT NULL DEFAULT now(), "modified" TIMESTAMP NOT NULL DEFAULT now(), "name" character varying NOT NULL, "notes" text, CONSTRAINT "UQ_1de4f2d708eb718e5c4160fe46d" UNIQUE ("name"), CONSTRAINT "PK_c0cad3879f874b089aa2d2b6185" PRIMARY KEY ("id"))`,
+            `CREATE TABLE "licensees" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created" TIMESTAMP NOT NULL DEFAULT now(), "modified" TIMESTAMP NOT NULL DEFAULT now(), "email" character varying NOT NULL, "notes" text, CONSTRAINT "UQ_1de4f2d708eb718e5c4160fe46d" UNIQUE ("email"), CONSTRAINT "PK_c0cad3879f874b089aa2d2b6185" PRIMARY KEY ("id"))`,
         );
         await queryRunner.query(
             `CREATE TABLE "software_titles" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created" TIMESTAMP NOT NULL DEFAULT now(), "modified" TIMESTAMP NOT NULL DEFAULT now(), "title" character varying NOT NULL, "publisher" character varying NOT NULL, "administrator" character varying NOT NULL, "quantity" integer DEFAULT '0', "renewal" TIMESTAMP, "notes" text, CONSTRAINT "UQ_64687151bbb0ccc045ab74a18de" UNIQUE ("title"), CONSTRAINT "PK_2c87f6d1193b7d8caf9c04f4a82" PRIMARY KEY ("id"))`,

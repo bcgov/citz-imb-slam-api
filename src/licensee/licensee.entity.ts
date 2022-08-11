@@ -9,7 +9,7 @@ export class LicenseeEntity extends GenericEntity {
     @Column({
         unique: true,
     })
-    name: string;
+    email: string;
 
     @ApiProperty()
     @Column('text', { nullable: true })
