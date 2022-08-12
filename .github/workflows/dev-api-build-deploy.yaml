@@ -59,7 +59,7 @@ jobs:
           APPLICATION_NAME: "${{ secrets.APPLICATION_NAME }}"
           LICENSE_PLATE: "${{ secrets.LICENSE_PLATE }}"
           ENVIRONMENT: "${{ secrets.ENVIRONMENT }}"
-          IMAGE_TAG: latest
+          IMAGE_TAG: dev
         run: |
           ./.github/helpers/deploy-api.sh ${{ env.LATEST_VERSION }}
 
