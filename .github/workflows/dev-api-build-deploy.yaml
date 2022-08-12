@@ -34,7 +34,7 @@ jobs:
 
       - name: Docker Tag Version
         run: |
-          docker tag citz-imb-slam-api_slam-api ${{ secrets.OPENSHIFT4_API_PUBLIC_IMAGE_REPOSITORY }}:latest
+          docker tag citz-imb-slam-api_slam-api ${{ secrets.OPENSHIFT4_API_PUBLIC_IMAGE_REPOSITORY }}:dev
 
       - name: Docker List Images
         run: |
@@ -42,8 +42,7 @@ jobs:
 
       - name: Docker Push Version
         run: |
-          docker push ${{ secrets.OPENSHIFT4_API_PUBLIC_IMAGE_REPOSITORY }}:latest
-
+          docker push ${{ secrets.OPENSHIFT4_API_PUBLIC_IMAGE_REPOSITORY }}:dev
 
       - name: Cluster Login
         uses: redhat-developer/openshift-actions@v1.1
@@ -59,7 +58,7 @@ jobs:
           APPLICATION_NAME: "${{ secrets.APPLICATION_NAME }}"
           LICENSE_PLATE: "${{ secrets.LICENSE_PLATE }}"
           ENVIRONMENT: "${{ secrets.ENVIRONMENT }}"
-          IMAGE_TAG: latest
+          IMAGE_TAG: dev
         run: |
           ./.github/helpers/deploy-api.sh ${{ env.LATEST_VERSION }}
 
