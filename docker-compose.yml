@@ -20,7 +20,7 @@ services:
     ###############################################################################
     ###                       POSTGRES ADMIN DB Container                       ###
     ###############################################################################
-    pgadmin:
+    pg-admin:
         container_name: pg-admin
         image: dpage/pgadmin4
         environment:
