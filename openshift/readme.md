@@ -1,13 +1,14 @@
 # Database Setup
+
 Only needs to be completed once per namespace, unless configuration changes.
 
-Does not need to be done again if database schema (ie tables, columns, etc.) changes.  Dev environment will automatically update.  Process for updating test and prod to be developed.
+Does not need to be done again if database schema (ie tables, columns, etc.) changes. Dev environment will automatically update. Process for updating test and prod to be developed.
 
 1. Setup OpenShift Secrets
 
-    - Secret name = slam-db
+    - Secret name = slam_db
     - Keys:
-        - POSTGRES_DATABASE - the name of the database
+        - POSTGRES_DB - the name of the database
         - POSTGRES_PASSWORD - the password for the database
         - POSTGRES_USER - the name of the user for the database
         - POSTGRES_SYNCHRONIZE - set to true for dev environment, false for test and prod
