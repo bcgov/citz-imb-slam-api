@@ -1,10 +1,7 @@
 name: TEST Deploy of SLAM API Image
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
-    branches: [main]
 
 jobs:
   build:
@@ -14,7 +11,23 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.inputs.tag }}
+      
+      - name: Cluster Login
+        uses: redhat-developer/openshift-actions@v1.1
+        with:
+          openshift_server_url: ${{ secrets.OPENSHIFT4_SERVER_URL }}
+          parameters: '{"apitoken": "${{ secrets.OPENSHIFT4_SA_PASSWORD }}"}'
+          cmd: |
+            'version'
 
+      - name: Login to Openshift Docker
+        run : |
+          docker login ${{ secrets.OPENSHIFT4_PUBLIC_IMAGE_REPOSITORY_BASE_URL }} -u ${{ secrets.OPENSHIFT4_SA_USERNAME }} -p ${{ secrets.OPENSHIFT4_SA_PASSWORD }}
+      
+      - name: Openshift Tag Imagestream
+        run: |
+          oc tag ${{ secrets.OPENSHIFT4_PUBLIC_IMAGE_REPOSITORY_BASE_URL }}/citz-imb-slam-api:dev citz-imb-slam-api:test
+      
       - name: Cluster Login
         uses: redhat-developer/openshift-actions@v1.1
         with:
@@ -33,6 +46,7 @@ jobs:
           APPLICATION_NAME: "${{ secrets.APPLICATION_NAME }}"
           LICENSE_PLATE: "${{ secrets.LICENSE_PLATE }}"
           ENVIRONMENT: "${{ secrets.TEST_ENVIRONMENT }}"
+          IMAGE_TAG: test
         run: |
           ./.github/helpers/deploy-api.sh
 
