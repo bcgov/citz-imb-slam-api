@@ -33,6 +33,9 @@ export class AuthService {
     }
 
     async login(user: any) {
+        // Ensure email is treated as lowercase
+        user.email = user.email.toLowerCase();
+
         let authorizedUser = await this.authorizeUser(user);
 
         if (!authorizedUser) {
