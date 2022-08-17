@@ -11,6 +11,9 @@ erDiagram
     licensee {
         string id
         string name
+        string email
+        string role
+        string notes
         date created
         date modified
     }
@@ -19,6 +22,7 @@ erDiagram
         string title
         string publisher
         string administrator
+        string notes
         number quantity
         date renewal
         date created
